@@ -35,9 +35,18 @@
     <!-- CONTROLES EXTRA (Lang + Theme) -->
     <div class="top-controls">
       <div class="lang-switch">
-        <button class="btn-icon active" onclick="setLang('pt')" title="Português">🇧🇷</button>
-        <button class="btn-icon" onclick="setLang('en')" title="English">🇺🇸</button>
-        <button class="btn-icon" onclick="setLang('es')" title="Español">🇪🇸</button>
+        <button class="btn-icon active" onclick="setLang('pt')" title="Português">
+          <img src="https://flagcdn.com/br.svg" alt="Português"
+            style="width: 20px; height: 14px; object-fit: cover; border-radius: 2px; pointer-events: none;">
+        </button>
+        <button class="btn-icon" onclick="setLang('en')" title="English">
+          <img src="https://flagcdn.com/us.svg" alt="English"
+            style="width: 20px; height: 14px; object-fit: cover; border-radius: 2px; pointer-events: none;">
+        </button>
+        <button class="btn-icon" onclick="setLang('es')" title="Español">
+          <img src="https://flagcdn.com/es.svg" alt="Español"
+            style="width: 20px; height: 14px; object-fit: cover; border-radius: 2px; pointer-events: none;">
+        </button>
       </div>
       <button class="btn-icon theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode"
         aria-label="Toggle Dark Mode">
