@@ -31,6 +31,31 @@
   --radius-pill: 999px;
 }
 
+[data-theme="dark"] {
+  --neu-bg: #121c26;
+  --neu-bg-2: #16222e;
+  --neu-light: #162432;
+  --neu-shadow-dark: #0a1017;
+  --neu-shadow-light: #1a2835;
+
+  --accent: #3b82f6;
+  --accent-2: #2563eb;
+  --accent-light: #93c5fd;
+  --accent-soft: rgba(59, 130, 246, 0.15);
+  --accent-border: rgba(59, 130, 246, 0.35);
+
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+
+  --shadow-out: 8px 8px 20px var(--neu-shadow-dark), -8px -8px 20px var(--neu-shadow-light);
+  --shadow-out-sm: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light);
+  --shadow-in: inset 4px 4px 10px var(--neu-shadow-dark), inset -4px -4px 10px var(--neu-shadow-light);
+  --shadow-in-sm: inset 2px 2px 6px var(--neu-shadow-dark), inset -2px -2px 6px var(--neu-shadow-light);
+  --shadow-hover: 12px 12px 28px var(--neu-shadow-dark), -12px -12px 28px var(--neu-shadow-light);
+  --shadow-accent: 6px 6px 16px rgba(59, 130, 246, 0.3), -4px -4px 12px var(--neu-shadow-light);
+}
+
 *,
 *::before,
 *::after {
@@ -117,6 +142,52 @@ body {
   background: var(--accent-soft);
 }
 
+[data-theme="dark"] .topnav-links a {
+  color: #1a2b3c;
+}
+
+[data-theme="dark"] .topnav-links a:hover {
+  color: var(--accent);
+}
+
+/* Controls (Lang / Theme) */
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid rgba(0, 0, 0, 0.06);
+}
+
+.lang-switch {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 200;
+}
+
+.btn-icon:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+.btn-icon.active {
+  opacity: 1;
+  filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.3));
+}
+
 /* =====================
    HERO — particle canvas section
 ===================== */
@@ -152,6 +223,15 @@ body {
   pointer-events: none;
   background:
     radial-gradient(ellipse at 50% 30%, rgba(234, 240, 247, 0.55) 0%, transparent 65%);
+}
+
+[data-theme="dark"] .hero {
+  background: linear-gradient(160deg, var(--neu-bg-2) 0%, var(--neu-bg) 50%, #0d141c 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .hero-overlay {
+  background: radial-gradient(ellipse at 50% 30%, rgba(30, 45, 60, 0.4) 0%, transparent 65%);
 }
 
 /* Content sits above both, but doesn't block mouse events on the bg */
@@ -497,14 +577,22 @@ footer {
   border-radius: 50%;
   background: var(--neu-bg);
   box-shadow: 0 0 0 3px var(--accent), 0 0 12px rgba(37, 99, 235, 0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item.active::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2), 0 0 16px rgba(37, 99, 235, 0.6);
 }
 
 .timeline-item:nth-child(odd)::before {
-  right: -2.5rem;
+  right: calc(-2rem - 6.5px);
+  /* Centraliza a bolinha de 13px exatamente a 2rem da borda direita */
 }
 
 .timeline-item:nth-child(even)::before {
-  left: -2.5rem;
+  left: calc(-2rem - 6.5px);
+  /* Centraliza a bolinha de 13px exatamente a 2rem da borda esquerda */
 }
 
 .timeline-year {
@@ -828,6 +916,47 @@ footer.section {
 }
 
 /* =====================
+   SKILLS PROGRESS BARS
+===================== */
+.skill-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.skill-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+}
+
+.skill-track {
+  width: 100%;
+  height: 8px;
+  background: var(--shadow-in-sm);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-fill {
+  height: 100%;
+  width: 0;
+  /* Animated via JS */
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+  border-radius: var(--radius-pill);
+  transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* =====================
    TECH CATEGORY GRID
 ===================== */
 .tech-grid-categories {
@@ -881,6 +1010,14 @@ footer.section {
   box-shadow: 8px 8px 28px rgba(37, 99, 235, 0.45), -4px -4px 12px rgba(255, 255, 255, 0.8);
 }
 
+[data-theme="dark"] .floating-whatsapp {
+  box-shadow: 6px 6px 20px rgba(37, 99, 235, 0.4), -3px -3px 10px rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="dark"] .floating-whatsapp:hover {
+  box-shadow: 8px 8px 28px rgba(37, 99, 235, 0.6), -4px -4px 12px rgba(59, 130, 246, 0.25);
+}
+
 /* =====================
    REVEAL ANIMATIONS
 ===================== */
@@ -924,7 +1061,8 @@ footer.section {
   .timeline-item::before,
   .timeline-item:nth-child(odd)::before,
   .timeline-item:nth-child(even)::before {
-    left: -1.8rem;
+    left: calc(15px - 6.5px - 2.5rem);
+    /* Posição perfeita: linha no 15px, bolinha 6.5px, item starta em 2.5rem */
     right: auto;
   }
 }
