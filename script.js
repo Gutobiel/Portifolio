@@ -359,7 +359,7 @@ const FEATURED = [
   "Tesla-Imagem",
   "Vania-Coiffeur",
   "Nexora-frontend",
-  "Nexora-API-Restfull-Django",
+  "ags-crm",
   "Prompt-manager",
   "Workshop-Arcane-projeto-web-IA",
   "CondoFloww",
@@ -371,7 +371,7 @@ const STATIC = [
   { name: "Tesla-Imagem", description: "Site institucional inspirado na Tesla. Design dark e visualmente marcante construido com HTML e CSS puro.", html_url: "https://github.com/Gutobiel/Tesla-Imagem", homepage: "https://tesla-imagem.vercel.app", language: "HTML" },
   { name: "Vania-Coiffeur", description: "Pagina profissional para cabeleireira com formulario de agendamento e apresentacao de servicos.", html_url: "https://github.com/Gutobiel/Vania-Coiffeur", homepage: "https://vania-coiffeur.vercel.app", language: "HTML" },
   { name: "Nexora-frontend", description: "Frontend completo para a plataforma Nexora, construido com Vue.js e integracao com API RESTful.", html_url: "https://github.com/Gutobiel/Nexora-frontend", homepage: "https://nexora-frontend-two.vercel.app", language: "Vue" },
-  { name: "Nexora-API-Restfull-Django", description: "API RESTful robusta construida com Django REST Framework para o ecossistema Nexora.", html_url: "https://github.com/Gutobiel/Nexora-API-Restfull-Django", homepage: null, language: "Python" },
+  { name: "ags-crm", description: "O CRM White-Label é uma plataforma completa de gestão comercial projetada para empresas que desejam organizar toda a sua operação de vendas em um único ambiente. Desde a captação do primeiro lead até a assinatura do contrato, cada etapa do funil comercial é controlada de forma visual e intuitiva.", extended_description: "<br><br><b>MÓDULOS DE IA (EM IMPLEMENTAÇÃO):</b><br>- <b>Chatbot Interno:</b> Responde sobre a empresa, informa produtos mais/menos vendidos, performance de vendedores, faturamento. Faz análise de sentimento de leads, roleplay de objeções e alertas preditivos.<br>- <b>Agente de Vendas no WhatsApp</b><br>- <b>IA de Análise Documental</b><br><br><b>DADOS DE TESTE:</b><br>Login: teste@gmail.com<br>Senha: 12345678901", html_url: "https://github.com/Gutobiel/ags-crm", homepage: "https://ags-crm-client.onrender.com/login", language: "TypeScript" },
   { name: "Prompt-manager", description: "Central de prompts de IA: organize, pesquise e copie prompts para otimizar seu fluxo com LLMs.", html_url: "https://github.com/Gutobiel/Prompt-manager", homepage: "https://prompt-manager-eight-phi.vercel.app", language: "JavaScript" },
   { name: "Workshop-Arcane-projeto-web-IA", description: "PsiQue — aplicacao web com agentes de IA para auxiliar psicologos em consultas terapeuticas.", html_url: "https://github.com/Gutobiel/Workshop-Arcane-projeto-web-IA", homepage: null, language: "HTML" },
   { name: "CondoFloww", description: "Sistema completo de gestao condominial com autenticacao, painel administrativo e CRUD.", html_url: "https://github.com/Gutobiel/CondoFloww", homepage: "https://condo-floww.vercel.app", language: "JavaScript" },
@@ -397,13 +397,20 @@ function buildCard(repo) {
   const langColor = LANG_COLORS[lang] || "#374151";
   const dot = `<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${langColor};margin-right:5px;"></span>`;
 
+  let descContent = repo.description || "Repositorio publico no GitHub.";
+  if (repo.extended_description) {
+    const extId = 'ext_' + repo.name.replace(/[^a-zA-Z0-9]/g, '');
+    descContent += `<span id="${extId}" style="display:none;">${repo.extended_description}</span>`;
+    descContent += `<br><button onclick="const el = document.getElementById('${extId}'); if(el.style.display==='none'){el.style.display='inline';this.innerText='Ver menos';}else{el.style.display='none';this.innerText='Ver mais';}" style="background:none;border:none;color:var(--accent);cursor:pointer;font-weight:bold;padding:0;margin-top:5px;font-size:0.85rem;font-family:inherit;">Ver mais</button>`;
+  }
+
   return `
     <article class="card reveal" style="padding:0;display:flex;flex-direction:column;">
       <div style="padding:1.4rem 1.4rem 0;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">
           <h3 style="margin:0;font-size:0.97rem;">${repo.name.replace(/-/g, " ")}</h3>
         </div>
-        <p style="margin:0 0 1rem;font-size:0.87rem;">${repo.description || "Repositorio publico no GitHub."}</p>
+        <p style="margin:0 0 1rem;font-size:0.87rem;">${descContent}</p>
       </div>
       <div style="margin-top:auto;padding:0.8rem 1.4rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(37,99,235,0.08);">
         <span style="font-size:0.78rem;font-weight:700;color:var(--text-muted);display:flex;align-items:center;">${dot}${lang}</span>
@@ -419,7 +426,22 @@ function buildCard(repo) {
 function renderCards(data) {
   const grid = document.getElementById("projects-grid");
   if (!grid) return;
-  const filtered = FEATURED.map(n => data.find(r => r.name === n)).filter(Boolean);
+
+  const filtered = FEATURED.map(n => {
+    let repo = data.find(r => r.name === n);
+    let staticFallback = STATIC.find(r => r.name === n);
+
+    if (repo && staticFallback) {
+      repo.description = staticFallback.description || repo.description;
+      repo.extended_description = staticFallback.extended_description;
+      repo.homepage = staticFallback.homepage || repo.homepage;
+      repo.language = staticFallback.language || repo.language;
+    } else if (!repo && staticFallback) {
+      repo = { ...staticFallback };
+    }
+    return repo;
+  }).filter(Boolean);
+
   grid.innerHTML = filtered.map(buildCard).join("");
   // Re-run reveal observer on newly created elements
   const obs = new IntersectionObserver(
