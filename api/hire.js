@@ -1,5 +1,6 @@
 // api/hire.js — Endpoint HTTP para agentes ou clientes enviarem propostas diretamente
 const { recordEvent } = require("./_analyticsStore");
+const { sendProposalEmail } = require("./_mailer");
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -47,6 +48,16 @@ module.exports = async function handler(req, res) {
         ip
       });
     } catch (e) {}
+
+    // Envia o e-mail com os detalhes da proposta para develop.ags@gmail.com
+    await sendProposalEmail({
+      name,
+      contact,
+      brief,
+      budget,
+      agent: agent || "direct-http",
+      ip
+    });
 
     return res.status(200).json({
       ok: true,

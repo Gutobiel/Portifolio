@@ -1,6 +1,7 @@
 // api/mcp.js — Model Context Protocol (MCP) Serverless Function para Vercel
 // Suporta JSON-RPC 2.0 sobre HTTP POST
 const { recordEvent } = require("./_analyticsStore");
+const { sendProposalEmail } = require("./_mailer");
 
 const RESUME_DATA = {
   name: "Augusto Gabriel Rodrigues dos Santos (Gutobiel)",
@@ -313,6 +314,21 @@ module.exports = async function handler(req, res) {
         const toolName = params?.name;
         const toolArgs = params?.arguments || {};
         const result = handleToolCall(toolName, toolArgs);
+
+        if (toolName === "book_intro" && toolArgs?.name && toolArgs?.contact && toolArgs?.brief) {
+          try {
+            await sendProposalEmail({
+              name: toolArgs.name,
+              contact: toolArgs.contact,
+              brief: toolArgs.brief,
+              budget: toolArgs.budget,
+              agent: userAgent || "MCP Client (book_intro)",
+              ip
+            });
+          } catch (e) {
+            console.error("[MCP] Erro ao enviar e-mail de book_intro:", e.message);
+          }
+        }
 
         try {
           recordEvent({
