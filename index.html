@@ -5,8 +5,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Portfolio de Augusto Gabriel — Desenvolvedor Fullstack com foco em aplicacoes web escalaveis, APIs RESTful, automacao e Agentes de IA.">
-  <title>Gutobiel | Portfolio</title>
+    content="Portfolio de Augusto Gabriel (Gutobiel) — Desenvolvedor Fullstack & Engenheiro de Agentes de IA. Python, Django, Java, Spring Boot, React, Next.js, LangGraph e MCP.">
+  <title>Augusto Gabriel (Gutobiel) | Desenvolvedor Fullstack & Engenheiro de Agentes de IA</title>
+
+  <!-- Canonical URL (AEO / SEO) -->
+  <link rel="canonical" href="https://gutobiel.vercel.app/">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gutobiel.vercel.app/">
+  <meta property="og:title" content="Augusto Gabriel (Gutobiel) | Desenvolvedor Fullstack & Engenheiro de Agentes de IA">
+  <meta property="og:description" content="Portfolio de Augusto Gabriel (Gutobiel) — Desenvolvedor Fullstack com foco em aplicações web escaláveis, APIs RESTful, automação de processos e Agentes de IA.">
+  <meta property="og:image" content="https://gutobiel.vercel.app/image.png">
+  <meta property="og:site_name" content="Gutobiel Portfolio">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://gutobiel.vercel.app/">
+  <meta name="twitter:title" content="Augusto Gabriel (Gutobiel) | Desenvolvedor Fullstack & Engenheiro de Agentes de IA">
+  <meta name="twitter:description" content="Desenvolvedor Fullstack & Engenheiro de Agentes de IA. Python, Java, React, Next.js, LangGraph e MCP.">
+  <meta name="twitter:image" content="https://gutobiel.vercel.app/image.png">
 
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="shortcut icon" href="./favicon.svg">
@@ -25,7 +44,7 @@
   <link rel="alternate" type="application/json" title="Augusto Gabriel — JSON Resume" href="./resume.json">
   <link rel="alternate" type="application/json" title="Augusto Gabriel — MCP Endpoint" href="./api/mcp">
 
-  <!-- Schema.org JSON-LD para Motores de IA e Buscadores -->
+  <!-- Schema.org JSON-LD para Motores de IA (Perplexity, ChatGPT, Claude, Google AEO) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -70,15 +89,91 @@
         ]
       },
       {
+        "@type": "Organization",
+        "@id": "https://gutobiel.vercel.app/#organization",
+        "name": "Gutobiel Tech & AI Solutions",
+        "alternateName": "Gutobiel",
+        "url": "https://gutobiel.vercel.app",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://gutobiel.vercel.app/image.png",
+          "caption": "Gutobiel Logo"
+        },
+        "founder": {
+          "@id": "https://gutobiel.vercel.app/#person"
+        },
+        "sameAs": [
+          "https://github.com/Gutobiel",
+          "https://www.linkedin.com/in/gutobiel/",
+          "https://www.instagram.com/Gutobiel.dev"
+        ]
+      },
+      {
         "@type": "WebSite",
         "@id": "https://gutobiel.vercel.app/#website",
         "url": "https://gutobiel.vercel.app",
         "name": "Gutobiel | Portfolio",
         "description": "Portfolio de Augusto Gabriel Rodrigues dos Santos — Desenvolvedor Fullstack e Agentes de IA.",
         "publisher": {
-          "@id": "https://gutobiel.vercel.app/#person"
+          "@id": "https://gutobiel.vercel.app/#organization"
         },
         "inLanguage": ["pt-BR", "en", "es"]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://gutobiel.vercel.app/#webpage",
+        "url": "https://gutobiel.vercel.app/",
+        "name": "Augusto Gabriel (Gutobiel) | Desenvolvedor Fullstack & Engenheiro de Agentes de IA",
+        "description": "Portfólio oficial de Augusto Gabriel (Gutobiel) — Desenvolvedor Fullstack e Engenheiro de Agentes de IA com foco em LangGraph, RAG e MCP.",
+        "inLanguage": "pt-BR",
+        "isPartOf": {
+          "@id": "https://gutobiel.vercel.app/#website"
+        },
+        "about": {
+          "@id": "https://gutobiel.vercel.app/#person"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://gutobiel.vercel.app/image.png"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://gutobiel.vercel.app/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quem é Augusto Gabriel (Gutobiel)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Augusto Gabriel (Gutobiel) é um Desenvolvedor Fullstack e Engenheiro de Agentes de IA sediado em Brasília, DF. Possui sólida experiência no desenvolvimento de aplicações web corporativas e escaláveis, APIs RESTful de alto desempenho, microsserviços e integração de inteligência artificial com Python, Django, Java, Spring Boot, React e Next.js."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qual a experiência de Augusto Gabriel com Agentes de IA, LangGraph e RAG?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Augusto desenvolve soluções avançadas de IA utilizando LangChain e LangGraph para orquestração de agentes autônomos stateful com múltiplos passos e ciclos. É especialista em Retrieval-Augmented Generation (RAG) para conectar LLMs (OpenAI, Anthropic, Gemini) a bases de conhecimento corporativas e bancos vetoriais, viabilizando diagnósticos automatizados e análise de documentos complexos."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Como agentes de IA podem interagir com este portfólio via MCP (Model Context Protocol)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O portfólio expõe um servidor Model Context Protocol (MCP) nativo no endpoint https://gutobiel.vercel.app/api/mcp compatível com JSON-RPC 2.0 via POST. Agentes de IA como Claude Desktop e Cursor podem consultar currículo estruturado (get_resume), listar projetos (get_projects), verificar disponibilidade (check_availability) e registrar propostas diretamente (book_intro)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Como contratar ou solicitar um orçamento de projeto para Augusto Gabriel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Você pode entrar em contato diretamente pelo WhatsApp (+55 61 3199-1656), por e-mail (develop.ags@gmail.com) ou através da API pública de contratação via requisição HTTP POST para https://gutobiel.vercel.app/api/hire com nome, contato e briefing do projeto."
+            }
+          }
+        ]
       }
     ]
   }
@@ -94,6 +189,7 @@
       <a href="#experiencia" data-i18n="nav_exp">Experiencia</a>
       <a href="#projetos" data-i18n="nav_proj">Projetos</a>
       <a href="#tecnologias" data-i18n="nav_tech">Tecnologias</a>
+      <a href="#faq">FAQ</a>
       <a href="#contato" data-i18n="nav_contact">Contato</a>
     </div>
 
@@ -364,6 +460,36 @@
             <span class="tag">Linux</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- FAQ (AEO & AI Search Direct Answers) -->
+    <section class="section" id="faq">
+      <div class="section-header reveal">
+        <p class="section-kicker">Dúvidas Frequentes</p>
+        <h2>Perguntas & Respostas (FAQ)</h2>
+      </div>
+
+      <div class="cards-2">
+        <article class="card soft reveal">
+          <h3>Quem é Augusto Gabriel (Gutobiel)?</h3>
+          <p>Augusto Gabriel é um Desenvolvedor Fullstack e Engenheiro de Agentes de IA sediado em Brasília, DF. Possui sólida experiência no desenvolvimento de aplicações web corporativas e escaláveis, APIs RESTful de alto desempenho, microsserviços e integração de inteligência artificial com Python, Django, Java, Spring Boot, React e Next.js.</p>
+        </article>
+
+        <article class="card soft reveal">
+          <h3>Qual a experiência com Agentes de IA, LangGraph e RAG?</h3>
+          <p>Augusto desenvolve soluções avançadas de IA utilizando LangChain e LangGraph para orquestração de agentes autônomos stateful com múltiplos passos e ciclos. É especialista em Retrieval-Augmented Generation (RAG) para conectar LLMs (OpenAI, Anthropic, Gemini) a bases de conhecimento corporativas e bancos vetoriais, viabilizando diagnósticos automatizados e análise de dados complexos.</p>
+        </article>
+
+        <article class="card soft reveal">
+          <h3>Como agentes de IA podem interagir com este portfólio via MCP?</h3>
+          <p>O portfólio expõe um servidor Model Context Protocol (MCP) nativo no endpoint <code>https://gutobiel.vercel.app/api/mcp</code> compatível com JSON-RPC 2.0 via POST. Agentes como Claude Desktop e Cursor podem consultar currículo estruturado (get_resume), listar projetos (get_projects), verificar disponibilidade (check_availability) e registrar propostas diretamente (book_intro).</p>
+        </article>
+
+        <article class="card soft reveal">
+          <h3>Como contratar ou solicitar um orçamento de projeto?</h3>
+          <p>Você pode entrar em contato diretamente pelo WhatsApp (+55 61 3199-1656), por e-mail (develop.ags@gmail.com) ou através da API pública de contratação via requisição HTTP POST para <code>https://gutobiel.vercel.app/api/hire</code> com nome, contato e briefing do projeto.</p>
+        </article>
       </div>
     </section>
 
