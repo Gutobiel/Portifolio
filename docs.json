@@ -1,0 +1,36 @@
+{
+  "name": "Augusto Gabriel (Gutobiel) — Portfólio & Agentes de IA",
+  "description": "Portfólio profissional e base de conhecimento estruturada para humanos e Agentes de IA.",
+  "baseUrl": "https://gutobiel.vercel.app",
+  "totalDocs": 4,
+  "docs": [
+    {
+      "title": "Home & Portfólio",
+      "path": "/",
+      "markdownUrl": "https://gutobiel.vercel.app/index.md",
+      "htmlUrl": "https://gutobiel.vercel.app/",
+      "content": "Augusto Gabriel (Gutobiel) é Desenvolvedor Fullstack e Engenheiro de Agentes de IA em Brasília - DF, especialista em Python, Django, Java, Spring Boot, React, Next.js, LangChain, LangGraph e RAG."
+    },
+    {
+      "title": "AI Analytics & Observability",
+      "path": "/analytics",
+      "markdownUrl": "https://gutobiel.vercel.app/analytics.md",
+      "htmlUrl": "https://gutobiel.vercel.app/analytics",
+      "content": "Painel de telemetria em tempo real com contadores de requisições de agentes, chamadas MCP e acessos de robôs de IA."
+    },
+    {
+      "title": "AGENTS.md — Instruções para Agentes e LLMs",
+      "path": "/AGENTS.md",
+      "markdownUrl": "https://gutobiel.vercel.app/AGENTS.md",
+      "htmlUrl": "https://gutobiel.vercel.app/AGENTS.md",
+      "content": "Diretrizes e interfaces para agentes de IA interagirem com o portfólio via Model Context Protocol (MCP) e API de contratação direta."
+    },
+    {
+      "title": "LLM Summary (llms.txt)",
+      "path": "/llms.txt",
+      "markdownUrl": "https://gutobiel.vercel.app/llms.txt",
+      "htmlUrl": "https://gutobiel.vercel.app/llms.txt",
+      "content": "Resumo canônico e conciso em texto plano sobre competências, projetos e canais de contratação de Augusto Gabriel."
+    }
+  ]
+}

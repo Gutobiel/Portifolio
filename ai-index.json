@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "entries": [
+    {
+      "id": "home",
+      "url": "https://gutobiel.vercel.app/",
+      "title": "Augusto Gabriel | Fullstack & Engenheiro de IA",
+      "description": "Portfólio profissional de Augusto Gabriel (Gutobiel), Desenvolvedor Fullstack e Engenheiro de Agentes de IA.",
+      "content": "---\ntitle: Augusto Gabriel | Fullstack & Engenheiro de IA\ndescription: Portfólio de Augusto Gabriel (Gutobiel) — Desenvolvedor Fullstack & Engenheiro de Agentes de IA. Python, Django, Java, Spring Boot, React, Next.js, LangGraph e MCP.\nurl: https://gutobiel.vercel.app/\ngenerated_by: aeo.js\n---\n\n# Augusto Gabriel (Gutobiel)\nDesenvolvedor Fullstack & Engenheiro de Agentes de IA\nBrasília, DF — Atuação remota e presencial\n\n## Resumo Profissional\nDesenvolvedor Fullstack com sólida experiência no desenvolvimento de aplicações web escaláveis, APIs RESTful de alta performance, microsserviços e integração de inteligência artificial. Especialista em automação de fluxos com Agentes de IA (LangChain, LangGraph, RAG e MCP), backend corporativo com Python (Django) e Java (Spring Boot), e frontend moderno com React, Next.js e TypeScript.\n\n## Competências Técnicas\n- **Inteligência Artificial & Agentes**: LangChain, LangGraph, RAG (Retrieval-Augmented Generation), Model Context Protocol (MCP), Vetorização, OpenAI API, Anthropic Claude, Google Gemini, Ollama.\n- **Backend**: Python (Django, FastAPI), Java (Spring Boot, Spring MVC, JPA/Hibernate), Node.js, RESTful APIs, Arquitetura em Microsserviços.\n- **Frontend**: JavaScript (ES6+), TypeScript, React, Next.js, HTML5, CSS3, Tailwind CSS.\n- **Bancos de Dados**: PostgreSQL, MySQL, SQLite, Bancos Vetoriais (ChromaDB, Pinecone, FAISS).\n- **DevOps & Ferramentas**: Git, GitHub, Docker, Vercel, CI/CD, Linux.\n\n## Projetos em Destaque\n1. **Psiquê**: Ecossistema de IA focado em saúde mental com triagem preliminar, análise preditiva multimodal e orquestração de múltiplos agentes via LangGraph e RAG.\n2. **Marca-AI**: Sistema autônomo com agentes inteligentes para pesquisa, registro e acompanhamento de marcas no INPI com relatórios de colidência.\n3. **Plataforma DNIT**: Microsserviços para gestão de infraestrutura rodoviária com Java, Spring Boot, Python e PostgreSQL.\n4. **Prompt Manager & Agent Runner**: Ferramenta corporativa para versionamento, avaliação e execução de prompts e cadeias de raciocínio.\n\n## Contato e Contratação\n- **WhatsApp**: +55 61 3199-1656\n- **Email**: develop.ags@gmail.com\n- **LinkedIn**: https://www.linkedin.com/in/gutobiel/\n- **GitHub**: https://github.com/Gutobiel\n- **MCP Endpoint**: https://gutobiel.vercel.app/api/mcp\n- **Hire Endpoint (HTTP POST)**: https://gutobiel.vercel.app/api/hire\n",
+      "keywords": [
+        "agentes de ia",
+        "langchain",
+        "langgraph",
+        "rag",
+        "python",
+        "django",
+        "java",
+        "spring boot",
+        "react",
+        "next.js",
+        "mcp",
+        "desenvolvedor fullstack",
+        "engenheiro de software",
+        "brasilia"
+      ],
+      "metadata": {
+        "tags": [
+          "portfolio",
+          "ai-engineer",
+          "fullstack",
+          "python",
+          "java",
+          "langchain",
+          "mcp"
+        ],
+        "lastmod": "2026-09-15"
+      }
+    },
+    {
+      "id": "analytics",
+      "url": "https://gutobiel.vercel.app/analytics",
+      "title": "AI Observability & Agent Monitor",
+      "description": "Observabilidade em tempo real de requisições de agentes, telemetria MCP e tráfego de crawlers de IA.",
+      "content": "---\ntitle: AI Observability & Agent Monitor | Augusto Gabriel (Gutobiel)\ndescription: Observabilidade e telemetria em tempo real de agentes de IA, chamadas MCP e rastreamento de bots autônomos.\nurl: https://gutobiel.vercel.app/analytics\ngenerated_by: aeo.js\n---\n\n# AI Observability & Agent Monitor\nPainel operacional de telemetria do ecossistema de agentes e endpoints do portfólio.\n\n## Métricas Monitoradas\n- Total de requisições de agentes de IA via MCP (/api/mcp)\n- Propostas e briefings recebidos via API de contratação (/api/hire)\n- Taxa de sucesso e latência de processamento\n- Descoberta por robôs de resposta (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)\n- Superfícies ativas: llms.txt, llms-full.txt, resume.json, AGENTS.md, ai-index.json, sitemap.xml\n",
+      "keywords": [
+        "observabilidade",
+        "telemetria",
+        "agentes de ia",
+        "mcp",
+        "analytics",
+        "gptbot",
+        "claudebot",
+        "perplexity"
+      ],
+      "metadata": {
+        "tags": [
+          "analytics",
+          "observability",
+          "ai",
+          "mcp",
+          "telemetry"
+        ],
+        "lastmod": "2026-09-15"
+      }
+    }
+  ]
+}

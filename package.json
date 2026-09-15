@@ -4,7 +4,9 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node scripts/test-aeo.mjs",
+    "build:aeo": "node scripts/generate-aeo.mjs",
+    "aeo:check": "node scripts/test-aeo.mjs"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,8 @@
   "homepage": "https://github.com/Gutobiel/Portifolio#readme",
   "dependencies": {
     "resend": "^6.28.1"
+  },
+  "devDependencies": {
+    "aeo.js": "^0.0.16"
   }
 }
