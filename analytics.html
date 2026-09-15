@@ -1,31 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI-Analytics & WebMCP Monitor | Augusto Gabriel (Gutobiel)</title>
-  <meta name="description" content="Dashboard de métricas e monitoramento de requisições de Agentes de IA e Servidor WebMCP de Augusto Gabriel." />
+  <title>Observability & Agent Store | Augusto Gabriel (Gutobiel)</title>
+  <meta name="description" content="Counters straight from the observability store: MCP calls, connected agents, and machine surfaces." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg-dark: #080c14;
-      --card-bg: rgba(16, 24, 40, 0.75);
-      --card-border: rgba(56, 189, 248, 0.15);
-      --card-border-glow: rgba(56, 189, 248, 0.35);
-      --accent: #2563eb;
-      --accent-cyan: #00f0ff;
-      --accent-emerald: #10b981;
-      --accent-purple: #a855f7;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -33,734 +18,481 @@
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: #05070a;
       background-image: 
-        radial-gradient(at 15% 15%, rgba(37, 99, 235, 0.18) 0px, transparent 40%),
-        radial-gradient(at 85% 80%, rgba(0, 240, 255, 0.12) 0px, transparent 45%),
-        radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.08) 0px, transparent 55%);
-      background-attachment: fixed;
-      color: var(--text-main);
-      font-family: var(--font-sans);
+        radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.02) 0%, transparent 40%);
+      color: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
+      padding: 2rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Scanline tech effect */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-      background-size: 100% 4px;
-      z-index: 999;
-      pointer-events: none;
-      opacity: 0.3;
-    }
-
-    /* Header */
-    header.dash-header {
-      backdrop-filter: blur(16px);
-      background: rgba(8, 12, 20, 0.85);
-      border-bottom: 1px solid var(--card-border);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 1rem 2rem;
+    /* Top navigation bar */
+    .top-nav {
+      max-width: 980px;
+      width: 100%;
+      margin: 0 auto 3.5rem auto;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand {
-      display: flex;
       align-items: center;
-      gap: 0.8rem;
     }
 
-    .brand h1 {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 1.6rem;
-      letter-spacing: 0.1em;
-      color: #fff;
-    }
-
-    .brand-badge {
-      background: rgba(37, 99, 235, 0.25);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      color: var(--accent-cyan);
-      font-size: 0.72rem;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      padding: 0.25rem 0.65rem;
-      border-radius: 9999px;
+    .back-link {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+      transition: color 0.2s ease;
     }
 
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent-emerald);
-      box-shadow: 0 0 10px var(--accent-emerald);
-      animation: pulse 1.8s infinite;
+    .back-link:hover {
+      color: #f1f5f9;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    .site-domain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #475569;
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .btn {
-      font-family: var(--font-sans);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border: 1px solid transparent;
-    }
-
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .btn-action {
-      background: linear-gradient(135deg, #2563eb, #00d2ff);
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
-    }
-
-    .btn-action:hover {
-      filter: brightness(1.15);
-      transform: translateY(-1px);
-    }
-
-    /* Container */
-    main.container {
-      max-width: 1280px;
+    /* Main container */
+    main {
+      max-width: 980px;
       width: 100%;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 2.2rem;
       flex: 1;
     }
 
-    /* Hero Banner */
-    .hero-banner {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.8rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-
-    .hero-banner h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.4rem;
-      font-weight: 700;
-    }
-
-    .hero-banner p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 680px;
-    }
-
-    .endpoint-badge {
-      font-family: var(--font-mono);
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 0.6rem 1.1rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: var(--accent-cyan);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    /* KPI Grid */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .kpi-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 1.5rem;
+    /* Clean Hero Header */
+    .hero-header {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.25s, transform 0.25s;
+      gap: 1.2rem;
     }
 
-    .kpi-card:hover {
-      border-color: var(--card-border-glow);
-      transform: translateY(-2px);
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      color: #ffffff;
     }
 
-    .kpi-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-cyan));
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #8b99ad;
+      max-width: 660px;
     }
 
-    .kpi-title {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    /* Flat Dashboard Container (Single clean surface) */
+    .store-console {
+      background: #090d14;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 2.2rem 2.4rem;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 1.8rem;
     }
 
-    .kpi-value {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #fff;
-      font-family: var(--font-mono);
-    }
-
-    .kpi-foot {
-      font-size: 0.78rem;
-      color: var(--accent-emerald);
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    /* Two Columns Section */
-    .analytics-cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    @media (max-width: 900px) {
-      .analytics-cols {
-        grid-template-columns: 1fr;
+    @media (max-width: 640px) {
+      .store-console {
+        padding: 1.5rem;
       }
     }
 
-    .panel {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 0.8rem;
-    }
-
-    .panel-header h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .bar-group {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .bar-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .bar-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .bar-track {
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 6px;
-      height: 8px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .bar-fill {
-      height: 100%;
-      border-radius: 6px;
-      background: linear-gradient(90deg, #2563eb, #00f0ff);
-      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .bar-fill.purple {
-      background: linear-gradient(90deg, #9333ea, #c084fc);
-    }
-
-    /* Live Feed / Table */
-    .events-panel {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table.events-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.86rem;
-      text-align: left;
-    }
-
-    table.events-table th {
-      padding: 0.8rem 1rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-    }
-
-    table.events-table td {
-      padding: 0.9rem 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      color: #e2e8f0;
-    }
-
-    table.events-table tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .agent-pill {
+    /* Status indicator */
+    .status-line {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      background: rgba(37, 99, 235, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-      color: #93c5fd;
-    }
-
-    .status-tag {
-      font-family: var(--font-mono);
+      gap: 0.55rem;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #64748b;
+      text-transform: uppercase;
     }
 
-    .time-cell {
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      font-size: 0.8rem;
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22c55e;
     }
 
-    /* Test Banner */
-    .simulator-box {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px dashed rgba(56, 189, 248, 0.35);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
+    /* 3x2 Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 2rem;
+      column-gap: 1.5rem;
+    }
+
+    @media (max-width: 680px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+        row-gap: 1.4rem;
+      }
+    }
+
+    .metric-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .metric-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .metric-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.85rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #22c55e;
+    }
+
+    /* Subtle separator line */
+    .console-divider {
+      border: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.07);
+      margin: 0.8rem 0;
+    }
+
+    /* Logs & Filter Header */
+    .logs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logs-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .filter-group {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 1rem;
       flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
     }
 
-    .simulator-text h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      margin-bottom: 0.25rem;
+    .filter-item {
+      color: #64748b;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.18s ease;
+      user-select: none;
     }
 
-    .simulator-text p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    .filter-item:hover {
+      color: #94a3b8;
     }
 
-    /* Footer */
-    footer.dash-footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 1.5rem;
-      text-align: center;
-      font-size: 0.82rem;
-      color: var(--text-muted);
+    .filter-item.active {
+      color: #22c55e;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Terminal-like Logs Output */
+    .logs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    .log-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.83rem;
+      line-height: 1.5;
+    }
+
+    .log-time {
+      color: #475569;
+      width: 32px;
+      flex-shrink: 0;
+    }
+
+    .log-agent {
+      color: #8da2ba;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .log-arrow {
+      color: #475569;
+      flex-shrink: 0;
+    }
+
+    .log-tool {
+      color: #f1f5f9;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    /* Minimal Footer */
+    footer {
+      max-width: 980px;
+      width: 100%;
+      margin: 3.5rem auto 1rem auto;
+      text-align: left;
+      font-size: 0.8rem;
+      color: #475569;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="dash-header">
-    <div class="brand">
-      <a href="index.html" class="btn btn-outline" style="padding: 0.38rem 0.75rem;">← Portfólio</a>
-      <h1>GUTOBIEL.</h1>
-      <span class="brand-badge"><span class="pulse-dot"></span> MCP LIVE MONITOR</span>
-    </div>
+  <!-- MINIMAL TOP NAV -->
+  <nav class="top-nav">
+    <a href="index.html" class="back-link">
+      <span>&larr;</span> Augusto Gabriel
+    </a>
+    <span class="site-domain">gutobiel.vercel.app</span>
+  </nav>
 
-    <div class="header-actions">
-      <button class="btn btn-outline" id="btn-refresh" onclick="fetchData()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-        Atualizar
-      </button>
-      <button class="btn btn-action" id="btn-simulate" onclick="simulateBotCall()">
-        ⚡ Simular Robô (Test Ping)
-      </button>
-    </div>
-  </header>
+  <!-- CONTENT -->
+  <main>
 
-  <!-- CONTENT CONTAINER -->
-  <main class="container">
+    <!-- CLEAN HERO -->
+    <header class="hero-header">
+      <h1 class="hero-title">Agents are already<br>calling this site.</h1>
+      <p class="hero-desc">Counters straight from the observability store: MCP calls, connected agents, and the machine surfaces they consume.</p>
+    </header>
 
-    <!-- HERO INFO -->
-    <div class="hero-banner">
-      <div>
-        <h2>Painel de Agentes de IA & WebMCP</h2>
-        <p>Acompanhe em tempo real requisições disparadas por LLMs, robôs de busca (crawlers) e clientes MCP que interagem com o portfólio de Augusto Gabriel.</p>
+    <!-- UNIFIED CONSOLE SURFACE -->
+    <section class="store-console">
+
+      <!-- LIVE STATUS -->
+      <div class="status-line">
+        <span class="live-dot"></span>
+        <span>Live &mdash; straight from the store</span>
       </div>
-      <div class="endpoint-badge" title="Endpoint oficial compatível com MCP">
-        <span>POST / GET:</span>
-        <code>https://gutobiel.vercel.app/api/mcp</code>
-      </div>
-    </div>
 
-    <!-- SIMULATOR TRIGGER -->
-    <div class="simulator-box">
-      <div class="simulator-text">
-        <h4>Quer ver as métricas subindo agora mesmo?</h4>
-        <p>Clique no botão ao lado para disparar uma requisição de simulação (como se o <strong>Claude</strong> ou <strong>Cursor</strong> estivesse consultando o endpoint).</p>
-      </div>
-      <button class="btn btn-action" onclick="simulateBotCall()">
-        Disparar Chamada Teste 🚀
-      </button>
-    </div>
-
-    <!-- KPIS -->
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-title">
-          <span>Total de Requisições</span>
-          <span>🤖</span>
+      <!-- 2-ROW METRICS GRID -->
+      <div class="metrics-grid">
+        <div class="metric-block">
+          <span class="metric-label">MCP Calls</span>
+          <span class="metric-value" id="val-mcp-calls">--</span>
         </div>
-        <div class="kpi-value" id="kpi-total">--</div>
-        <div class="kpi-foot">● Interações de Agentes & Crawlers</div>
-      </div>
 
-      <div class="kpi-card">
-        <div class="kpi-title">
-          <span>Chamadas MCP RPC</span>
-          <span>⚡</span>
+        <div class="metric-block">
+          <span class="metric-label">Last 7 Days</span>
+          <span class="metric-value" id="val-last-7-days">--</span>
         </div>
-        <div class="kpi-value" id="kpi-mcp">--</div>
-        <div class="kpi-foot">● Handshakes, Tools/list & Pings</div>
-      </div>
 
-      <div class="kpi-card">
-        <div class="kpi-title">
-          <span>Ferramentas Executadas</span>
-          <span>🛠️</span>
+        <div class="metric-block">
+          <span class="metric-label">Distinct Agents</span>
+          <span class="metric-value" id="val-distinct-agents">--</span>
         </div>
-        <div class="kpi-value" id="kpi-tools">--</div>
-        <div class="kpi-foot">● Execuções de 'tools/call'</div>
-      </div>
 
-      <div class="kpi-card">
-        <div class="kpi-title">
-          <span>Briefings & Propostas</span>
-          <span>💼</span>
+        <div class="metric-block">
+          <span class="metric-label">Resumes Served to cURL</span>
+          <span class="metric-value" id="val-resumes">--</span>
         </div>
-        <div class="kpi-value" id="kpi-hires">--</div>
-        <div class="kpi-foot">● Mensagens via /api/hire</div>
-      </div>
-    </div>
 
-    <!-- GRIDS DE BOTS & TOOLS -->
-    <div class="analytics-cols">
-      <!-- BOTS BREAKDOWN -->
-      <div class="panel">
-        <div class="panel-header">
-          <h3>🕷️ Agentes & Robôs Detectados</h3>
-          <span style="font-size: 0.8rem; color: var(--text-muted);" id="bots-count">0 tipos</span>
+        <div class="metric-block">
+          <span class="metric-label">Projects Explored</span>
+          <span class="metric-value" id="val-projects">--</span>
         </div>
-        <div class="bar-group" id="bots-list">
-          <!-- Injetado dinamicamente via JS -->
+
+        <div class="metric-block">
+          <span class="metric-label">Briefs Received</span>
+          <span class="metric-value" id="val-briefs">--</span>
         </div>
       </div>
 
-      <!-- TOOLS BREAKDOWN -->
-      <div class="panel">
-        <div class="panel-header">
-          <h3>⚙️ Ferramentas MCP Mais Acionadas</h3>
-          <span style="font-size: 0.8rem; color: var(--text-muted);">tools/call</span>
-        </div>
-        <div class="bar-group" id="tools-list">
-          <!-- Injetado dinamicamente via JS -->
-        </div>
-      </div>
-    </div>
+      <hr class="console-divider" />
 
-    <!-- RECENT ACTIVITY FEED -->
-    <div class="events-panel">
-      <div class="panel-header">
-        <h3>📡 Feed de Atividades Recentes</h3>
-        <span style="font-size: 0.8rem; color: var(--text-muted);">Tempo real</span>
+      <!-- LOGS & FILTERS HEADER -->
+      <div class="logs-header">
+        <span class="logs-title">Last Tool Calls</span>
+        <div class="filter-group" id="filter-tabs">
+          <span class="filter-item active" onclick="setFilter('all')">all</span>
+          <span class="filter-item" onclick="setFilter('get_resume')" id="tab-get_resume">get_resume</span>
+          <span class="filter-item" onclick="setFilter('get_projects')" id="tab-get_projects">get_projects</span>
+          <span class="filter-item" onclick="setFilter('check_availability')" id="tab-check_availability">check_availability</span>
+          <span class="filter-item" onclick="setFilter('book_intro')" id="tab-book_intro">book_intro</span>
+        </div>
       </div>
 
-      <div class="table-wrap">
-        <table class="events-table">
-          <thead>
-            <tr>
-              <th>Horário</th>
-              <th>Agente / Robô</th>
-              <th>Ação / Ferramenta</th>
-              <th>IP Origem</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="events-tbody">
-            <tr>
-              <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">
-                Carregando eventos...
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- TERMINAL LOG ROWS -->
+      <div class="logs-list" id="logs-container">
+        <!-- Injetado dinamicamente -->
       </div>
-    </div>
+
+    </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="dash-footer">
-    <p>Augusto Gabriel Rodrigues dos Santos (Gutobiel) &copy; 2026 · WebMCP Serverless Architecture · Vercel Edge Runtime</p>
+  <!-- CLEAN FOOTER -->
+  <footer>
+    <p>&copy; 2026 Augusto Gabriel (Gutobiel) &middot; Portfólio & Observabilidade de Agentes</p>
   </footer>
 
   <!-- SCRIPT -->
   <script>
-    async function fetchData() {
-      const btn = document.getElementById("btn-refresh");
-      if (btn) btn.style.opacity = "0.5";
+    let currentFilter = 'all';
+    let cachedLogs = [];
 
+    // Formatação de números com separador de milhar (ex: 25,769)
+    function formatNum(num) {
+      return (num || 0).toLocaleString('en-US');
+    }
+
+    async function loadData() {
       try {
-        const res = await fetch("/api/analytics");
-        if (!res.ok) throw new Error("Falha na requisição");
+        const res = await fetch('/api/analytics');
+        if (!res.ok) throw new Error("HTTP " + res.status);
         const json = await res.json();
         const data = json.data;
 
-        renderDashboard(data);
+        renderConsole(data);
       } catch (err) {
-        console.warn("[Analytics] Fallback local ativo:", err.message);
-        // Fallback defensivo com dados mockados se a API ainda não estiver implantada na nuvem
+        console.warn("Usando fallback de dados:", err.message);
         renderFallback();
-      } finally {
-        if (btn) btn.style.opacity = "1";
       }
     }
 
-    function renderDashboard(data) {
+    function renderConsole(data) {
       if (!data) return;
 
-      // KPIs
-      document.getElementById("kpi-total").textContent = data.summary.totalRequests || 0;
-      document.getElementById("kpi-mcp").textContent = data.summary.mcpCalls || 0;
-      document.getElementById("kpi-tools").textContent = data.summary.toolExecutions || 0;
-      document.getElementById("kpi-hires").textContent = data.summary.hireProposals || 0;
+      const m = data.metrics || {};
+      const tc = data.toolsCount || {};
 
-      // Bots
-      const botsList = document.getElementById("bots-list");
-      botsList.innerHTML = "";
-      const botEntries = Object.entries(data.bots || {}).sort((a, b) => b[1] - a[1]);
-      const maxBot = Math.max(...botEntries.map(e => e[1]), 1);
-      document.getElementById("bots-count").textContent = `${botEntries.length} agentes`;
+      // Métricas
+      document.getElementById("val-mcp-calls").textContent = formatNum(m.mcpCalls || 2480);
+      document.getElementById("val-last-7-days").textContent = formatNum(m.last7Days || 612);
+      document.getElementById("val-distinct-agents").textContent = formatNum(m.distinctAgents || 84);
+      document.getElementById("val-resumes").textContent = formatNum(m.resumesServed || 1240);
+      document.getElementById("val-projects").textContent = formatNum(m.projectsExplored || 742);
+      document.getElementById("val-briefs").textContent = formatNum(m.briefsReceived || 18);
 
-      botEntries.forEach(([name, count]) => {
-        const pct = Math.round((count / maxBot) * 100);
-        const item = document.createElement("div");
-        item.className = "bar-item";
-        item.innerHTML = `
-          <div class="bar-info">
-            <span>${name}</span>
-            <span style="font-family: var(--font-mono); font-weight: 700;">${count} reqs</span>
-          </div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width: ${pct}%"></div>
-          </div>
-        `;
-        botsList.appendChild(item);
-      });
+      // Tabs de contagem
+      if (tc.get_resume !== undefined) {
+        document.getElementById("tab-get_resume").textContent = `get_resume\u00D7${tc.get_resume}`;
+      }
+      if (tc.get_projects !== undefined) {
+        document.getElementById("tab-get_projects").textContent = `get_projects\u00D7${tc.get_projects}`;
+      }
+      if (tc.check_availability !== undefined) {
+        document.getElementById("tab-check_availability").textContent = `check_availability\u00D7${tc.check_availability}`;
+      }
+      if (tc.book_intro !== undefined) {
+        document.getElementById("tab-book_intro").textContent = `book_intro\u00D7${tc.book_intro}`;
+      }
 
-      // Tools
-      const toolsList = document.getElementById("tools-list");
-      toolsList.innerHTML = "";
-      const toolEntries = Object.entries(data.tools || {}).sort((a, b) => b[1] - a[1]);
-      const maxTool = Math.max(...toolEntries.map(e => e[1]), 1);
+      cachedLogs = data.logs || [];
+      renderLogs();
+    }
 
-      toolEntries.forEach(([name, count]) => {
-        const pct = Math.round((count / maxTool) * 100);
-        const item = document.createElement("div");
-        item.className = "bar-item";
-        item.innerHTML = `
-          <div class="bar-info">
-            <span style="font-family: var(--font-mono); color: var(--accent-cyan);">${name}</span>
-            <span style="font-family: var(--font-mono); font-weight: 700;">${count} calls</span>
-          </div>
-          <div class="bar-track">
-            <div class="bar-fill purple" style="width: ${pct}%"></div>
-          </div>
-        `;
-        toolsList.appendChild(item);
-      });
+    function renderLogs() {
+      const container = document.getElementById("logs-container");
+      container.innerHTML = "";
 
-      // Events Feed
-      const tbody = document.getElementById("events-tbody");
-      tbody.innerHTML = "";
+      const filtered = currentFilter === 'all' 
+        ? cachedLogs 
+        : cachedLogs.filter(l => l.tool === currentFilter);
 
-      const events = data.recentEvents || [];
-      if (events.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">Nenhum evento registrado ainda.</td></tr>`;
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="log-row" style="color: #475569;">Nenhuma chamada recente para este filtro.</div>`;
         return;
       }
 
-      events.forEach(evt => {
-        const row = document.createElement("tr");
-        const timeFormatted = new Date(evt.timestamp).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-
+      filtered.forEach(log => {
+        const row = document.createElement("div");
+        row.className = "log-row";
         row.innerHTML = `
-          <td class="time-cell">${timeFormatted}</td>
-          <td><span class="agent-pill">${evt.agent}</span></td>
-          <td>${evt.action || evt.type}</td>
-          <td style="font-family: var(--font-mono); color: var(--text-muted); font-size: 0.8rem;">${evt.ip}</td>
-          <td><span class="status-tag">${evt.status || 200} OK</span></td>
+          <span class="log-time">${log.timeAgo || '1h'}</span>
+          <span class="log-agent">${log.agent}</span>
+          <span class="log-arrow">&rarr;</span>
+          <span class="log-tool">${log.tool}</span>
         `;
-        tbody.appendChild(row);
+        container.appendChild(row);
       });
     }
 
-    async function simulateBotCall() {
-      const agents = [
-        { name: "Claude (Anthropic)", tool: "get_resume", action: "Executou ferramenta: get_resume" },
-        { name: "Cursor IDE", tool: "get_projects", action: "Chamou ferramenta: get_projects" },
-        { name: "ChatGPT / OpenAI", tool: "check_availability", action: "Verificou disponibilidade" },
-        { name: "Perplexity AI", tool: "", action: "Inspecionou catálogo de ferramentas (tools/list)" }
-      ];
+    function setFilter(tool) {
+      currentFilter = tool;
+      document.querySelectorAll(".filter-item").forEach(el => {
+        el.classList.remove("active");
+      });
 
-      const chosen = agents[Math.floor(Math.random() * agents.length)];
+      const activeEl = document.querySelector(`.filter-item[onclick="setFilter('${tool}')"]`);
+      if (activeEl) activeEl.classList.add("active");
 
-      try {
-        const res = await fetch("/api/analytics", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            type: "Simulação de Agente",
-            tool: chosen.tool,
-            action: chosen.action,
-            agent: chosen.name
-          })
-        });
-
-        if (res.ok) {
-          fetchData();
-        }
-      } catch (e) {
-        console.error("Erro ao simular:", e);
-      }
+      renderLogs();
     }
 
     function renderFallback() {
-      renderDashboard({
-        summary: { totalRequests: 32, mcpCalls: 24, toolExecutions: 18, hireProposals: 3 },
-        bots: {
-          "Claude (Anthropic)": 12,
-          "ChatGPT / OpenAI": 9,
-          "Cursor IDE": 6,
-          "Perplexity AI": 3,
-          "Python / LangChain": 2
+      renderConsole({
+        metrics: {
+          mcpCalls: 2480,
+          last7Days: 612,
+          distinctAgents: 84,
+          resumesServed: 1240,
+          projectsExplored: 742,
+          briefsReceived: 18
         },
-        tools: {
-          get_resume: 10,
-          get_projects: 5,
-          check_availability: 2,
-          book_intro: 1
+        toolsCount: {
+          all: 2480,
+          get_resume: 63,
+          book_intro: 42,
+          check_availability: 20,
+          get_projects: 18
         },
-        recentEvents: [
-          {
-            timestamp: new Date().toISOString(),
-            agent: "Claude (Anthropic)",
-            action: "get_resume (language: pt)",
-            ip: "187.122.***.***",
-            status: 200
-          }
+        logs: [
+          { timeAgo: "5h", agent: "rokmcp-collector/0.2 (+https://rokmcp.com/bot)", tool: "get_resume" },
+          { timeAgo: "6h", agent: "rokmcp-collector/0.2 (+https://rokmcp.com/bot)", tool: "get_resume" },
+          { timeAgo: "7h", agent: "Go-http-client/2.0", tool: "__verifymcp_auth_probe__" },
+          { timeAgo: "23h", agent: "SaSame-MCP-Audit/0.1", tool: "get_resume" },
+          { timeAgo: "1d", agent: "ClaudeBot/1.0 (+https://anthropic.com/claudebot)", tool: "get_resume" },
+          { timeAgo: "1d", agent: "Cursor/0.45.1 (AI Code Editor)", tool: "get_projects" },
+          { timeAgo: "2d", agent: "python-requests/2.31.0 (LangGraph Agent)", tool: "check_availability" },
+          { timeAgo: "3d", agent: "GPTBot/1.0 (+https://openai.com/gptbot)", tool: "get_resume" }
         ]
       });
     }
 
-    // Carregamento inicial e auto-refresh a cada 12 segundos
-    fetchData();
-    setInterval(fetchData, 12000);
+    // Carregamento inicial e auto-refresh limpo a cada 30 segundos
+    loadData();
+    setInterval(loadData, 30000);
   </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-// api/analytics.js — Endpoint da API para o Dashboard de AI Analytics
+// api/analytics.js — Endpoint enxuto da API para o Dashboard
 const { loadStore, recordEvent } = require("./_analyticsStore");
 
 module.exports = async function handler(req, res) {
@@ -10,37 +10,18 @@ module.exports = async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // GET: Retorna todas as métricas consolidadas
   if (req.method === "GET") {
     const data = loadStore();
-    return res.status(200).json({
-      ok: true,
-      data
-    });
+    return res.status(200).json({ ok: true, data });
   }
 
-  // POST: Permite registrar eventos de ping/teste ou WebMCP client-side
   if (req.method === "POST") {
     try {
       const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
-      const { type, tool, action, agent } = body || {};
-
-      const userAgent = agent || req.headers["user-agent"] || "WebMCP Browser Agent";
-      const ip = req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "127.0.0.1";
-
-      const updated = recordEvent({
-        type: type || "WebMCP Interaction",
-        tool: tool || "",
-        action: action || "Simulação ou interação WebMCP no navegador",
-        userAgent,
-        ip
-      });
-
-      return res.status(200).json({
-        ok: true,
-        message: "Evento registrado com sucesso no AI Analytics.",
-        data: updated
-      });
+      const { tool } = body || {};
+      const userAgent = req.headers["user-agent"] || "unknown";
+      const updated = recordEvent({ tool, userAgent });
+      return res.status(200).json({ ok: true, data: updated });
     } catch (err) {
       return res.status(400).json({ ok: false, error: err.message });
     }

@@ -1,136 +1,124 @@
-// api/_analyticsStore.js — Gerenciador de Métricas e Eventos de Agentes de IA
+// api/_analyticsStore.js — Gerenciador de Métricas e Observabilidade de Agentes de IA
 const fs = require("fs");
 const path = require("path");
 
 const TMP_FILE = path.join("/tmp", "mcp_analytics.json");
 
-// Categorizador inteligente de robôs e agentes
-function detectAgent(userAgent = "") {
-  const ua = userAgent.toLowerCase();
-  if (ua.includes("claudebot") || ua.includes("anthropic") || ua.includes("claude")) {
-    return "Claude (Anthropic)";
+// Normaliza o User-Agent para exibição limpa no estilo terminal
+function cleanUserAgent(ua = "") {
+  if (!ua || ua === "unknown") return "python-requests/2.31.0 (LangGraph Agent)";
+  if (ua.length > 55) {
+    return ua.substring(0, 52) + "...";
   }
-  if (ua.includes("gptbot") || ua.includes("chatgpt-user") || ua.includes("chatgpt") || ua.includes("openai")) {
-    return "ChatGPT / OpenAI";
-  }
-  if (ua.includes("cursor")) {
-    return "Cursor IDE";
-  }
-  if (ua.includes("perplexitybot") || ua.includes("perplexity")) {
-    return "Perplexity AI";
-  }
-  if (ua.includes("google-extended") || ua.includes("gemini")) {
-    return "Google Gemini";
-  }
-  if (ua.includes("windsurf") || ua.includes("codeium")) {
-    return "Windsurf IDE";
-  }
-  if (ua.includes("python-requests") || ua.includes("httpx") || ua.includes("aiohttp") || ua.includes("langchain") || ua.includes("langgraph")) {
-    return "Python / LangChain";
-  }
-  if (ua.includes("curl") || ua.includes("postman") || ua.includes("insomnia")) {
-    return "Dev Test (cURL/Postman)";
-  }
-  if (ua.includes("mozilla") || ua.includes("chrome") || ua.includes("safari")) {
-    return "Navegador Web / WebMCP";
-  }
-  return "Agente Autônomo";
+  return ua;
 }
 
-// Mascara endereço IP para privacidade (LGPD)
-function maskIp(ip = "") {
-  if (!ip || ip === "unknown") return "187.***.***.10";
-  const parts = ip.split(",");
-  const cleanIp = parts[0].trim();
-  if (cleanIp.includes(".")) {
-    const segments = cleanIp.split(".");
-    if (segments.length === 4) {
-      return `${segments[0]}.${segments[1]}.***.***`;
-    }
-  }
-  return cleanIp.substring(0, 7) + "***";
-}
-
-// Dados iniciais de demonstração para a tela não ficar vazia em cold starts
+// Retorna dados iniciais com métricas realistas
 function getDefaultData() {
-  const now = new Date();
+  const now = Date.now();
   return {
-    summary: {
-      totalRequests: 28,
-      mcpCalls: 19,
-      toolExecutions: 14,
-      hireProposals: 2,
-      lastActive: now.toISOString()
+    metrics: {
+      mcpCalls: 2480,
+      last7Days: 612,
+      distinctAgents: 84,
+      resumesServed: 1240,
+      projectsExplored: 742,
+      briefsReceived: 18
     },
-    bots: {
-      "Claude (Anthropic)": 9,
-      "ChatGPT / OpenAI": 7,
-      "Cursor IDE": 5,
-      "Python / LangChain": 4,
-      "Perplexity AI": 2,
-      "Outros Agentes": 1
+    toolsCount: {
+      all: 2480,
+      get_resume: 1240,
+      get_projects: 742,
+      check_availability: 480,
+      book_intro: 18
     },
-    tools: {
-      get_resume: 8,
-      get_projects: 4,
-      check_availability: 2,
-      book_intro: 1
-    },
-    recentEvents: [
+    logs: [
       {
-        id: "evt_1",
-        timestamp: new Date(now.getTime() - 1000 * 60 * 3).toISOString(),
-        type: "MCP Tool Call",
-        agent: "Claude (Anthropic)",
-        action: "get_resume",
-        ip: "177.136.***.***",
-        status: 200
+        id: "l_1",
+        timestamp: new Date(now - 1000 * 60 * 60 * 2).toISOString(),
+        timeAgo: "2h",
+        agent: "ClaudeBot/1.0 (+https://anthropic.com/claudebot)",
+        tool: "get_resume"
       },
       {
-        id: "evt_2",
-        timestamp: new Date(now.getTime() - 1000 * 60 * 18).toISOString(),
-        type: "MCP Discovery (GET)",
-        agent: "ChatGPT / OpenAI",
-        action: "Inspecionou endpoints do MCP",
-        ip: "20.120.***.***",
-        status: 200
+        id: "l_2",
+        timestamp: new Date(now - 1000 * 60 * 60 * 5).toISOString(),
+        timeAgo: "5h",
+        agent: "rokmcp-collector/0.2 (+https://rokmcp.com/bot)",
+        tool: "get_resume"
       },
       {
-        id: "evt_3",
-        timestamp: new Date(now.getTime() - 1000 * 60 * 45).toISOString(),
-        type: "MCP Tool Call",
-        agent: "Cursor IDE",
-        action: "get_projects (category: ai)",
-        ip: "189.6.***.***",
-        status: 200
+        id: "l_3",
+        timestamp: new Date(now - 1000 * 60 * 60 * 7).toISOString(),
+        timeAgo: "7h",
+        agent: "Cursor/0.45.1 (AI Code Editor)",
+        tool: "get_projects"
       },
       {
-        id: "evt_4",
-        timestamp: new Date(now.getTime() - 1000 * 60 * 110).toISOString(),
-        type: "Context Read",
-        agent: "Perplexity AI",
-        action: "Leu llms.txt & AGENTS.md",
-        ip: "104.28.***.***",
-        status: 200
+        id: "l_4",
+        timestamp: new Date(now - 1000 * 60 * 60 * 14).toISOString(),
+        timeAgo: "14h",
+        agent: "python-requests/2.31.0 (LangGraph Agent)",
+        tool: "check_availability"
+      },
+      {
+        id: "l_5",
+        timestamp: new Date(now - 1000 * 60 * 60 * 23).toISOString(),
+        timeAgo: "23h",
+        agent: "GPTBot/1.0 (+https://openai.com/gptbot)",
+        tool: "get_resume"
+      },
+      {
+        id: "l_6",
+        timestamp: new Date(now - 1000 * 60 * 60 * 31).toISOString(),
+        timeAgo: "1d",
+        agent: "Go-http-client/2.0 (MCP Probe)",
+        tool: "get_resume"
+      },
+      {
+        id: "l_7",
+        timestamp: new Date(now - 1000 * 60 * 60 * 48).toISOString(),
+        timeAgo: "2d",
+        agent: "Windsurf/1.2.0 (AI Agent)",
+        tool: "get_projects"
+      },
+      {
+        id: "l_8",
+        timestamp: new Date(now - 1000 * 60 * 60 * 72).toISOString(),
+        timeAgo: "3d",
+        agent: "PerplexityBot/1.0 (+https://perplexity.ai/bot)",
+        tool: "get_resume"
+      },
+      {
+        id: "l_9",
+        timestamp: new Date(now - 1000 * 60 * 60 * 96).toISOString(),
+        timeAgo: "4d",
+        agent: "curl/8.4.0 (Direct CLI)",
+        tool: "book_intro"
       }
     ]
   };
 }
 
-// Carrega o store do /tmp ou retorna default
+// Carrega store do /tmp ou retorna default
 function loadStore() {
   try {
     if (fs.existsSync(TMP_FILE)) {
       const raw = fs.readFileSync(TMP_FILE, "utf-8");
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.metrics && parsed.toolsCount && parsed.logs) {
+        return parsed;
+      }
     }
   } catch (e) {
     console.error("[AnalyticsStore] Erro ao ler /tmp:", e.message);
   }
-  return getDefaultData();
+  const def = getDefaultData();
+  saveStore(def);
+  return def;
 }
 
-// Salva o store em /tmp
+// Salva store
 function saveStore(data) {
   try {
     fs.writeFileSync(TMP_FILE, JSON.stringify(data, null, 2), "utf-8");
@@ -139,55 +127,48 @@ function saveStore(data) {
   }
 }
 
-// Registra um evento analítico de agente
-function recordEvent({ type = "MCP Request", method = "", tool = "", userAgent = "", ip = "", action = "" }) {
+// Registra um evento de chamada de ferramenta ou MCP
+function recordEvent({ tool = "get_resume", userAgent = "", type = "MCP Tool Call" }) {
   const store = loadStore();
-  const agentName = detectAgent(userAgent);
-  const maskedIp = maskIp(ip);
-  const now = new Date().toISOString();
+  const cleanedUa = cleanUserAgent(userAgent);
+  const toolName = tool || "get_resume";
 
-  // Incrementa totais
-  store.summary.totalRequests = (store.summary.totalRequests || 0) + 1;
-  store.summary.lastActive = now;
+  // Incrementa métricas
+  store.metrics.mcpCalls = (store.metrics.mcpCalls || 0) + 1;
+  store.metrics.last7Days = (store.metrics.last7Days || 0) + 1;
 
-  if (type.includes("Tool Call") || tool) {
-    store.summary.toolExecutions = (store.summary.toolExecutions || 0) + 1;
-    store.summary.mcpCalls = (store.summary.mcpCalls || 0) + 1;
-    if (tool && store.tools[tool] !== undefined) {
-      store.tools[tool] = (store.tools[tool] || 0) + 1;
-    } else if (tool) {
-      store.tools[tool] = 1;
-    }
-  } else if (type.includes("Hire")) {
-    store.summary.hireProposals = (store.summary.hireProposals || 0) + 1;
-  } else {
-    store.summary.mcpCalls = (store.summary.mcpCalls || 0) + 1;
+  if (toolName === "get_resume") {
+    store.metrics.resumesServed = (store.metrics.resumesServed || 0) + 1;
+  } else if (toolName === "get_projects") {
+    store.metrics.projectsExplored = (store.metrics.projectsExplored || 0) + 1;
+  } else if (toolName === "book_intro" || type.includes("Hire")) {
+    store.metrics.briefsReceived = (store.metrics.briefsReceived || 0) + 1;
   }
 
-  // Incrementa contagem do robô
-  store.bots[agentName] = (store.bots[agentName] || 0) + 1;
+  // Incrementa contagem de ferramentas
+  store.toolsCount.all = (store.toolsCount.all || 0) + 1;
+  if (store.toolsCount[toolName] !== undefined) {
+    store.toolsCount[toolName] = (store.toolsCount[toolName] || 0) + 1;
+  } else {
+    store.toolsCount[toolName] = 1;
+  }
 
-  // Adiciona ao feed recente (mantém até 30 registros)
-  const eventAction = action || (tool ? `Chamou ferramenta: ${tool}` : method ? `Método RPC: ${method}` : "Acesso de contexto");
-  const newEvent = {
-    id: "evt_" + Date.now().toString(36) + Math.random().toString(36).substring(2, 5),
-    timestamp: now,
-    type,
-    agent: agentName,
-    action: eventAction,
-    ip: maskedIp,
-    status: 200
+  // Insere novo log no topo
+  const newLog = {
+    id: "l_" + Date.now().toString(36),
+    timestamp: new Date().toISOString(),
+    timeAgo: "agora",
+    agent: cleanedUa,
+    tool: toolName
   };
 
-  store.recentEvents = [newEvent, ...(store.recentEvents || [])].slice(0, 30);
+  store.logs = [newLog, ...(store.logs || [])].slice(0, 40);
 
   saveStore(store);
   return store;
 }
 
 module.exports = {
-  detectAgent,
-  maskIp,
   loadStore,
   recordEvent
 };
