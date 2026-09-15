@@ -1,4 +1,5 @@
 // api/hire.js — Endpoint HTTP para agentes ou clientes enviarem propostas diretamente
+const { recordEvent } = require("./_analyticsStore");
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -33,6 +34,19 @@ module.exports = async function handler(req, res) {
     if (name.length > 120) return res.status(400).json({ ok: false, error: "'name' muito longo (máx 120 caracteres)." });
     if (contact.length > 160) return res.status(400).json({ ok: false, error: "'contact' muito longo (máx 160 caracteres)." });
     if (brief.length > 3000) return res.status(400).json({ ok: false, error: "'brief' muito longo (máx 3000 caracteres)." });
+
+    const userAgent = req.headers["user-agent"] || "unknown";
+    const ip = req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "unknown";
+    console.log(`[Hire Analytics] Proposal received from "${name}" (${contact}) via agent="${agent || 'direct-http'}" (IP: ${ip}, UA: ${userAgent})`);
+
+    try {
+      recordEvent({
+        type: "Hire Proposal",
+        action: `Nova proposta de ${name} (${contact})`,
+        userAgent: agent || userAgent,
+        ip
+      });
+    } catch (e) {}
 
     return res.status(200).json({
       ok: true,

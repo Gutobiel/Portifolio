@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/analytics", "destination": "/analytics.html" },
+    { "source": "/api/mcp/analytics", "destination": "/api/analytics" },
+    { "source": "/api/mcp/analitycs", "destination": "/api/analytics" }
+  ]
+}

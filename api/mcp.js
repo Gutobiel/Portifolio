@@ -1,5 +1,6 @@
 // api/mcp.js — Model Context Protocol (MCP) Serverless Function para Vercel
 // Suporta JSON-RPC 2.0 sobre HTTP POST
+const { recordEvent } = require("./_analyticsStore");
 
 const RESUME_DATA = {
   name: "Augusto Gabriel Rodrigues dos Santos (Gutobiel)",
@@ -210,18 +211,35 @@ module.exports = async function handler(req, res) {
     return res.status(200).end();
   }
 
+  const userAgent = req.headers["user-agent"] || "unknown";
+  const ip = req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "unknown";
+
   // Se for GET, retorna página de status / auto-descrição do servidor MCP
   if (req.method === "GET") {
+    console.log(`[MCP Analytics] GET Discovery from ${userAgent} (IP: ${ip})`);
+    try {
+      recordEvent({
+        type: "MCP Discovery (GET)",
+        action: "Inspecionou auto-descrição do servidor MCP",
+        userAgent,
+        ip
+      });
+    } catch (e) {}
+
+    const host = req.headers["x-forwarded-host"] || req.headers.host || "gutobiel.vercel.app";
+    const proto = req.headers["x-forwarded-proto"] || "https";
+    const baseUrl = `${proto}://${host}`;
+
     return res.status(200).json({
       name: "gutobiel-portfolio-mcp",
       version: "1.0.0",
       description: "Servidor MCP público de Augusto Gabriel (Gutobiel). Aceita requisições JSON-RPC 2.0 via POST.",
       protocolVersion: "2024-11-05",
       endpoints: {
-        mcp: "https://gutobiel.dev/api/mcp",
-        hire: "https://gutobiel.dev/api/hire",
-        llms_txt: "https://gutobiel.dev/llms.txt",
-        agents_md: "https://gutobiel.dev/AGENTS.md"
+        mcp: `${baseUrl}/api/mcp`,
+        hire: `${baseUrl}/api/hire`,
+        llms_txt: `${baseUrl}/llms.txt`,
+        agents_md: `${baseUrl}/AGENTS.md`
       },
       availableTools: TOOLS.map(t => ({ name: t.name, description: t.description }))
     });
@@ -235,8 +253,20 @@ module.exports = async function handler(req, res) {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
     const { id, method, params } = body || {};
 
+    console.log(`[MCP Analytics] POST RPC: method="${method}" tool="${params?.name || 'none'}" agent="${userAgent}" IP="${ip}"`);
+
     switch (method) {
       case "initialize":
+        try {
+          recordEvent({
+            type: "MCP Handshake",
+            method: "initialize",
+            action: "Handshake inicial do protocolo MCP",
+            userAgent,
+            ip
+          });
+        } catch (e) {}
+
         return res.status(200).json({
           jsonrpc: "2.0",
           id,
@@ -261,6 +291,16 @@ module.exports = async function handler(req, res) {
         });
 
       case "tools/list":
+        try {
+          recordEvent({
+            type: "MCP Discovery",
+            method: "tools/list",
+            action: "Consultou catálogo de ferramentas (tools/list)",
+            userAgent,
+            ip
+          });
+        } catch (e) {}
+
         return res.status(200).json({
           jsonrpc: "2.0",
           id,
@@ -273,6 +313,17 @@ module.exports = async function handler(req, res) {
         const toolName = params?.name;
         const toolArgs = params?.arguments || {};
         const result = handleToolCall(toolName, toolArgs);
+
+        try {
+          recordEvent({
+            type: "MCP Tool Call",
+            method: "tools/call",
+            tool: toolName,
+            action: `Chamou ferramenta: ${toolName}`,
+            userAgent,
+            ip
+          });
+        } catch (e) {}
 
         return res.status(200).json({
           jsonrpc: "2.0",

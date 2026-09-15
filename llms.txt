@@ -6,23 +6,23 @@
 > Localização: Brasília, DF - Brasil (Disponível para projetos remotos e contratações).
 
 ## Seções Principais
-- [Início](https://gutobiel.dev/#inicio): Visão geral, bio e status profissional.
-- [Experiência](https://gutobiel.dev/#experiencia): Histórico profissional (DNIT, Versátil TI, CEUB, Freelancer).
-- [Projetos](https://gutobiel.dev/#projetos): Repositórios em destaque, soluções web e integrações com IA.
-- [Cursos & Certificações](https://gutobiel.dev/#cursos): Psiquê (LangGraph/RAG), Prompt Manager, Spring Boot, Algoritmos.
-- [Tecnologias](https://gutobiel.dev/#tecnologias): Stack dividida em Frontend, Backend, IA & Automação e Ferramentas.
-- [Contato](https://gutobiel.dev/#contato): Canais diretos de comunicação e contratação.
+- [Início](https://gutobiel.vercel.app/#inicio): Visão geral, bio e status profissional.
+- [Experiência](https://gutobiel.vercel.app/#experiencia): Histórico profissional (DNIT, Versátil TI, CEUB, Freelancer).
+- [Projetos](https://gutobiel.vercel.app/#projetos): Repositórios em destaque, soluções web e integrações com IA.
+- [Cursos & Certificações](https://gutobiel.vercel.app/#cursos): Psiquê (LangGraph/RAG), Prompt Manager, Spring Boot, Algoritmos.
+- [Tecnologias](https://gutobiel.vercel.app/#tecnologias): Stack dividida em Frontend, Backend, IA & Automação e Ferramentas.
+- [Contato](https://gutobiel.vercel.app/#contato): Canais diretos de comunicação e contratação.
 
 ## Interfaces para Agentes de IA (MCP & Machine-Readable)
 Este portfólio suporta o Model Context Protocol (MCP) e formatos legíveis por agentes autônomos:
-- **Servidor MCP Público (Streamable HTTP JSON-RPC 2.0)**: `https://gutobiel.dev/api/mcp`
-- **Manifesto de Instruções para Agentes**: [AGENTS.md](https://gutobiel.dev/AGENTS.md)
-- **Currículo Estruturado (JSON Resume)**: [resume.json](https://gutobiel.dev/resume.json)
-- **Contexto Completo em Texto**: [llms-full.txt](https://gutobiel.dev/llms-full.txt)
-- **Endpoint de Contratação / Briefing**: `POST https://gutobiel.dev/api/hire`
+- **Servidor MCP Público (Streamable HTTP JSON-RPC 2.0)**: `https://gutobiel.vercel.app/api/mcp`
+- **Manifesto de Instruções para Agentes**: [AGENTS.md](https://gutobiel.vercel.app/AGENTS.md)
+- **Currículo Estruturado (JSON Resume)**: [resume.json](https://gutobiel.vercel.app/resume.json)
+- **Contexto Completo em Texto**: [llms-full.txt](https://gutobiel.vercel.app/llms-full.txt)
+- **Endpoint de Contratação / Briefing**: `POST https://gutobiel.vercel.app/api/hire`
 
 ## Ferramentas MCP Disponíveis
-Ao conectar `https://gutobiel.dev/api/mcp` em clientes MCP (Claude Desktop, Cursor, ChatGPT Custom Connector):
+Ao conectar `https://gutobiel.vercel.app/api/mcp` em clientes MCP (Claude Desktop, Cursor, ChatGPT Custom Connector):
 1. `get_resume`: Retorna os dados completos do currículo, qualificações, formação e experiência de Augusto Gabriel.
 2. `get_projects`: Lista os principais projetos desenvolvidos, stack utilizada e links para repositórios e demos.
 3. `check_availability`: Verifica o status atual de disponibilidade para novas oportunidades ou contratos freelance.

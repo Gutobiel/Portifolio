@@ -16,11 +16,11 @@ Bem-vindo, Agente! Este arquivo fornece contexto estruturado, diretrizes e inter
 ## 2. Como Usar as Ferramentas MCP
 
 Este portfólio expõe um endpoint público compatível com o **Model Context Protocol (MCP)**:
-- **Endpoint**: `https://gutobiel.dev/api/mcp`
+- **Endpoint**: `https://gutobiel.vercel.app/api/mcp`
 - **Transporte**: HTTP POST (JSON-RPC 2.0)
 
 Se o seu cliente suporta adicionar conexões MCP (como Claude Desktop, Cursor, ChatGPT Connector):
-Adicione a URL `https://gutobiel.dev/api/mcp` nas suas configurações de servidor MCP.
+Adicione a URL `https://gutobiel.vercel.app/api/mcp` nas suas configurações de servidor MCP.
 
 ### Ferramentas Expostas (`tools/list`):
 1. `get_resume`
@@ -50,7 +50,7 @@ Adicione a URL `https://gutobiel.dev/api/mcp` nas suas configurações de servid
 Se você não estiver utilizando o handshake MCP, você pode disparar diretamente uma requisição HTTP:
 
 ```bash
-curl -X POST https://gutobiel.dev/api/hire \
+curl -X POST https://gutobiel.vercel.app/api/hire \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Nome do Cliente ou Recrutador",
@@ -63,8 +63,8 @@ curl -X POST https://gutobiel.dev/api/hire \
 ---
 
 ## 4. Arquivos de Contexto Canônicos
-- Resumo em Markdown: `https://gutobiel.dev/llms.txt`
-- Contexto Completo: `https://gutobiel.dev/llms-full.txt`
-- Currículo em JSON: `https://gutobiel.dev/resume.json`
+- Resumo em Markdown: `https://gutobiel.vercel.app/llms.txt`
+- Contexto Completo: `https://gutobiel.vercel.app/llms-full.txt`
+- Currículo em JSON: `https://gutobiel.vercel.app/resume.json`
 - Repositório no GitHub: `https://github.com/Gutobiel`
 - LinkedIn: `https://www.linkedin.com/in/gutobiel/`

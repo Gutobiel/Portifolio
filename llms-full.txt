@@ -92,10 +92,10 @@ Atualmente atua com foco na pesquisa e desenvolvimento de Agentes Autônomos de 
 
 ## 7. Interfaces de Agente & Protocolo MCP
 Augusto Gabriel disponibiliza uma interface MCP pública em seu site:
-- **URL do Servidor MCP**: `https://gutobiel.dev/api/mcp`
+- **URL do Servidor MCP**: `https://gutobiel.vercel.app/api/mcp`
 - **Protocolo**: Model Context Protocol (JSON-RPC 2.0 via HTTP POST)
 - **Métodos Suportados**:
   - `initialize`: Retorna versão e capacidades do servidor.
   - `tools/list`: Lista as ferramentas disponíveis.
   - `tools/call`: Executa `get_resume`, `get_projects`, `check_availability` ou `book_intro`.
-- **Canal de contratação direta para agentes**: `POST https://gutobiel.dev/api/hire` (aceita payload JSON com `{ name, contact, brief, budget?, agent? }`).
+- **Canal de contratação direta para agentes**: `POST https://gutobiel.vercel.app/api/hire` (aceita payload JSON com `{ name, contact, brief, budget?, agent? }`).
