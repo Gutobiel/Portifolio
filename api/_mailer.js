@@ -1,7 +1,7 @@
 // api/_mailer.js — Serviço oficial com SDK da Resend
 const { Resend } = require("resend");
 
-const TO_EMAIL = process.env.NOTIFICATION_EMAIL || "develop.ags@gmail.com";
+const TO_EMAIL = process.env.NOTIFICATION_EMAIL || "gutobielsantos@gmail.com";
 
 async function sendProposalEmail({ name, contact, brief, budget, agent = "Agente de IA", ip = "" }) {
   const apiKey = process.env.RESEND_API_KEY;
