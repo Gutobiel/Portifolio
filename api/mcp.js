@@ -8,7 +8,7 @@ const RESUME_DATA = {
   location: "Brasília, DF - Brasil (Atuação remota e presencial)",
   contact: {
     email: "develop.ags@gmail.com",
-    whatsapp: "+55 61 98569-5745",
+    whatsapp: "+55 61 3199-1656",
     github: "https://github.com/Gutobiel",
     linkedin: "https://www.linkedin.com/in/gutobiel/"
   },
