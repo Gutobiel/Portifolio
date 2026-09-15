@@ -1,13 +1,17 @@
-// api/_mailer.js — Serviço de Envio de E-mail de Propostas via Resend
+// api/_mailer.js — Serviço oficial com SDK da Resend
+const { Resend } = require("resend");
+
 const TO_EMAIL = process.env.NOTIFICATION_EMAIL || "develop.ags@gmail.com";
 
 async function sendProposalEmail({ name, contact, brief, budget, agent = "Agente de IA", ip = "" }) {
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey) {
-    console.warn("[Mailer] RESEND_API_KEY não encontrada nas variáveis da Vercel. Adicione RESEND_API_KEY para receber no e-mail.");
+    console.warn("[Mailer] RESEND_API_KEY não encontrada nas variáveis da Vercel.");
     return { success: false, reason: "missing_api_key" };
   }
+
+  const resend = new Resend(apiKey);
 
   const htmlContent = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #0b0f19; color: #f1f5f9; border-radius: 12px; border: 1px solid #1e293b;">
@@ -39,39 +43,30 @@ async function sendProposalEmail({ name, contact, brief, budget, agent = "Agente
         <div style="background-color: #131b2e; padding: 16px; border-radius: 8px; border: 1px solid #1e293b; font-size: 14px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap;">${brief}</div>
       </div>
 
-      <div style="border-top: 1px solid #1e293b; padding-top: 14px; font-size: 11px; color: #64748b; display: flex; justify-content: space-between;">
-        <span>Agente: ${agent}</span>
-        <span>IP: ${ip || "N/A"} &middot; ${new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}</span>
+      <div style="border-top: 1px solid #1e293b; padding-top: 14px; font-size: 11px; color: #64748b;">
+        <span>Agente: ${agent}</span> &middot; 
+        <span>${new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}</span>
       </div>
     </div>
   `;
 
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        from: "Portfólio Gutobiel <onboarding@resend.dev>",
-        to: [TO_EMAIL],
-        reply_to: contact.includes("@") ? contact : undefined,
-        subject: `💼 Nova Proposta de Projeto: ${name}`,
-        html: htmlContent
-      })
+    const response = await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: TO_EMAIL,
+      subject: `💼 Nova Proposta de Projeto: ${name}`,
+      html: htmlContent
     });
 
-    const data = await res.json();
-    if (!res.ok) {
-      console.error("[Mailer] Erro ao disparar e-mail via Resend:", data);
-      return { success: false, error: data };
+    if (response.error) {
+      console.error("[Mailer] Erro retornado pela Resend:", response.error);
+      return { success: false, error: response.error };
     }
 
-    console.log(`[Mailer] E-mail enviado com sucesso para ${TO_EMAIL} (ID: ${data.id})`);
-    return { success: true, id: data.id };
+    console.log(`[Mailer] E-mail enviado com sucesso via Resend para ${TO_EMAIL} (ID: ${response.data?.id})`);
+    return { success: true, data: response.data };
   } catch (err) {
-    console.error("[Mailer] Exceção ao enviar e-mail:", err.message);
+    console.error("[Mailer] Exceção ao enviar e-mail com Resend:", err.message);
     return { success: false, error: err.message };
   }
 }
