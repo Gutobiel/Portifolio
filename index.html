@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -18,6 +18,71 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css">
+
+  <!-- LLM & AI Agent Discovery (AEO / Agent-Ready) -->
+  <link rel="alternate" type="text/plain" title="Augusto Gabriel — llms.txt" href="./llms.txt">
+  <link rel="alternate" type="text/markdown" title="Augusto Gabriel — AGENTS.md" href="./AGENTS.md">
+  <link rel="alternate" type="application/json" title="Augusto Gabriel — JSON Resume" href="./resume.json">
+  <link rel="alternate" type="application/json" title="Augusto Gabriel — MCP Endpoint" href="./api/mcp">
+
+  <!-- Schema.org JSON-LD para Motores de IA e Buscadores -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://gutobiel.dev/#person",
+        "name": "Augusto Gabriel Rodrigues dos Santos",
+        "alternateName": "Gutobiel",
+        "jobTitle": "Desenvolvedor Fullstack & Engenheiro de Agentes de IA",
+        "description": "Desenvolvedor Fullstack com foco em aplicações web escaláveis, APIs RESTful, automação de processos e Agentes de IA.",
+        "url": "https://gutobiel.dev",
+        "image": "https://gutobiel.dev/image.png",
+        "email": "develop.ags@gmail.com",
+        "telephone": "+55-61-98569-5745",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Brasília",
+          "addressRegion": "DF",
+          "addressCountry": "BR"
+        },
+        "sameAs": [
+          "https://github.com/Gutobiel",
+          "https://www.linkedin.com/in/gutobiel/",
+          "https://www.instagram.com/Gutobiel.dev"
+        ],
+        "knowsAbout": [
+          "Agentes de IA",
+          "LangChain",
+          "LangGraph",
+          "RAG (Retrieval-Augmented Generation)",
+          "Python",
+          "Django",
+          "Java",
+          "Spring Boot",
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Next.js",
+          "APIs RESTful",
+          "Model Context Protocol (MCP)"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://gutobiel.dev/#website",
+        "url": "https://gutobiel.dev",
+        "name": "Gutobiel | Portfolio",
+        "description": "Portfolio de Augusto Gabriel Rodrigues dos Santos — Desenvolvedor Fullstack e Agentes de IA.",
+        "publisher": {
+          "@id": "https://gutobiel.dev/#person"
+        },
+        "inLanguage": ["pt-BR", "en", "es"]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -83,6 +148,7 @@
         <div class="hero-status reveal">
           <span class="hero-status-dot"></span>
           <span data-i18n="hero_status">Disponivel para projetos &middot; Contratações</span>
+          <a href="./llms.txt" target="_blank" class="agent-badge" title="Compatível com Agentes de IA e Protocolo MCP">⚡ Agent-Ready · MCP</a>
         </div>
       </div>
     </div>

@@ -1,0 +1,41 @@
+# Augusto Gabriel (Gutobiel) · Agent-Ready Portfolio
+
+> Desenvolvedor Fullstack com foco em aplicações web escaláveis, APIs RESTful, automação de processos e Agentes de IA.
+> Experiência sólida em Python (Django), Java (Spring Boot), JavaScript/TypeScript, React, Next.js e frameworks de IA como LangChain e LangGraph.
+> Atuação em desenvolvimento corporativo (Qintess / DNIT) e projetos para clientes e inovação.
+> Localização: Brasília, DF - Brasil (Disponível para projetos remotos e contratações).
+
+## Seções Principais
+- [Início](https://gutobiel.dev/#inicio): Visão geral, bio e status profissional.
+- [Experiência](https://gutobiel.dev/#experiencia): Histórico profissional (DNIT, Versátil TI, CEUB, Freelancer).
+- [Projetos](https://gutobiel.dev/#projetos): Repositórios em destaque, soluções web e integrações com IA.
+- [Cursos & Certificações](https://gutobiel.dev/#cursos): Psiquê (LangGraph/RAG), Prompt Manager, Spring Boot, Algoritmos.
+- [Tecnologias](https://gutobiel.dev/#tecnologias): Stack dividida em Frontend, Backend, IA & Automação e Ferramentas.
+- [Contato](https://gutobiel.dev/#contato): Canais diretos de comunicação e contratação.
+
+## Interfaces para Agentes de IA (MCP & Machine-Readable)
+Este portfólio suporta o Model Context Protocol (MCP) e formatos legíveis por agentes autônomos:
+- **Servidor MCP Público (Streamable HTTP JSON-RPC 2.0)**: `https://gutobiel.dev/api/mcp`
+- **Manifesto de Instruções para Agentes**: [AGENTS.md](https://gutobiel.dev/AGENTS.md)
+- **Currículo Estruturado (JSON Resume)**: [resume.json](https://gutobiel.dev/resume.json)
+- **Contexto Completo em Texto**: [llms-full.txt](https://gutobiel.dev/llms-full.txt)
+- **Endpoint de Contratação / Briefing**: `POST https://gutobiel.dev/api/hire`
+
+## Ferramentas MCP Disponíveis
+Ao conectar `https://gutobiel.dev/api/mcp` em clientes MCP (Claude Desktop, Cursor, ChatGPT Custom Connector):
+1. `get_resume`: Retorna os dados completos do currículo, qualificações, formação e experiência de Augusto Gabriel.
+2. `get_projects`: Lista os principais projetos desenvolvidos, stack utilizada e links para repositórios e demos.
+3. `check_availability`: Verifica o status atual de disponibilidade para novas oportunidades ou contratos freelance.
+4. `book_intro`: Permite que o agente envie uma proposta de projeto ou mensagem de introdução diretamente para Augusto.
+
+## Casos de Uso
+Recorra a Augusto Gabriel para:
+- **Desenvolvimento de Agentes de IA & Automação**: Criação de workflows com LangGraph, LangChain, RAG e integração com LLMs.
+- **Engenharia Fullstack & APIs**: Desenvolvimento de APIs RESTful robustas com Python/Django, Java/Spring Boot ou Node.js, e interfaces modernas em React/Next.js/Vue.
+- **Automação de Processos & Bots**: Bots conversacionais, integrações com WhatsApp e automações de fluxos de negócio.
+
+## Contato Direto
+- Email: develop.ags@gmail.com
+- WhatsApp: +55 (61) 98569-5745
+- GitHub: https://github.com/Gutobiel
+- LinkedIn: https://www.linkedin.com/in/gutobiel/

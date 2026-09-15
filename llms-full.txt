@@ -1,0 +1,101 @@
+# Augusto Gabriel Rodrigues dos Santos (Gutobiel) — Perfil Completo & Portfólio de Engenharia
+
+> Este documento contém o contexto integral para modelos de linguagem (LLMs) e agentes de IA sobre o desenvolvedor Augusto Gabriel.
+
+---
+
+## 1. Dados Pessoais & Contato
+- Nome completo: Augusto Gabriel Rodrigues dos Santos
+- Nome profissional: Augusto Gabriel (Gutobiel)
+- Cargo: Desenvolvedor Fullstack & Engenheiro de Agentes de IA
+- Localização: Brasília, Distrito Federal, Brasil
+- Modalidade: Trabalho Remoto, Híbrido ou Presencial (Brasília)
+- E-mail: develop.ags@gmail.com
+- WhatsApp: +55 (61) 98569-5745
+- GitHub: https://github.com/Gutobiel
+- LinkedIn: https://www.linkedin.com/in/gutobiel/
+- Instagram: https://www.instagram.com/Gutobiel.dev
+
+---
+
+## 2. Resumo Profissional
+Desenvolvedor Fullstack com sólida atuação no desenvolvimento de aplicações web escaláveis, atuando tanto no front-end quanto no back-end. Experiência na construção de APIs RESTful, automação de processos de negócio, bots de atendimento ao cliente e integrações com serviços de terceiros (incluindo WhatsApp, CRMs e plataformas externas).
+Atualmente atua com foco na pesquisa e desenvolvimento de Agentes Autônomos de IA, arquiteturas RAG (Retrieval-Augmented Generation) e orquestração de fluxos complexos utilizando LangGraph e LangChain.
+
+---
+
+## 3. Experiência Profissional
+
+### Qintess — Desenvolvedor Fullstack
+- Período: Agosto de 2025 – Presente
+- Local: Brasília, DF (Atuação em sistemas para o DNIT - Departamento Nacional de Infraestrutura de Transportes)
+- Responsabilidades e Conquistas:
+  * Desenvolvimento, manutenção e evolução contínua de aplicações web corporativas e módulos internos com Python / Django e JavaScript.
+  * Criação e aprimoramento de interfaces responsivas seguindo princípios modernos de UX/UI, acessibilidade e componentização.
+  * Integração estável e escalável entre frontend e backend através de serviços RESTful.
+  * Controle de versionamento com Git / GitHub (gestão de branches, pull requests e revisões de código).
+  * Participação ativa na concepção e implementação da IA interna do DNIT para automação de triagem e processamento de dados.
+
+### Projetos Freelance
+- Período: 2023 – Presente
+- Modalidade: Remoto
+- Principais entregas:
+  * **Marca-AI**: Plataforma moderna de agendamento e gerenciamento de quadras esportivas com geolocalização (Leaflet), frontend responsivo e backend robusto.
+  * **CondoFLOW**: Sistema completo de gestão condominial, facilitando comunicação entre síndicos, moradores e controle de ocorrências/reservas.
+  * **Automações e CRMs**: Implementação de fluxos de vendas e atendimento automatizado via WhatsApp e APIs de CRM.
+
+### Versátil TI — Monitor de Linguagem de Programação
+- Período: Fevereiro de 2024 – Junho de 2024
+- Local: Brasília, DF
+- Responsabilidades:
+  * Orientação pedagógica e suporte técnico a alunos no aprendizado de linguagens como Python, Java, JavaScript, PHP, SQL, HTML e CSS.
+  * Elaboração de exercícios práticos, depuração de erros e mentoria em boas práticas de lógica de programação e arquitetura de software.
+
+---
+
+## 4. Formação Acadêmica
+- Instituição: Centro Universitário de Brasília (CEUB)
+- Curso: Análise e Desenvolvimento de Sistemas (Graduação)
+- Período: Julho de 2022 – Dezembro de 2024
+- Projeto de Conclusão de Curso: **Semáforos Inteligentes**
+  * Descrição: Sistema preditivo para otimização de tráfego urbano utilizando Inteligência Artificial, Big Data e algoritmos de Machine Learning para reduzir congestionamentos e tempo de espera.
+
+---
+
+## 5. Cursos de Especialização & Destaques em IA
+- **Psiquê (Programação Web + IA)**:
+  * Plataforma com Agentes de IA projetada para psicólogos e terapeutas.
+  * Analisa transcrições e áudios de consultas utilizando RAG (Retrieval-Augmented Generation) com LangGraph e OpenAI API.
+  * Gera diagnósticos preliminares estruturados, análise de sentimentos e resumos clínicos automatizados.
+  * Stack: Python, Django, LangGraph, OpenAI API, LangChain.
+  * Repositório: https://github.com/Gutobiel/Workshop-Arcane-projeto-web-IA
+- **Prompt Manager (Full Stack + IA)**:
+  * Aplicação web para organização, versionamento, teste e reutilização de prompts para modelos de linguagem.
+  * Stack: JavaScript, Next.js, Node.js.
+  * Demo: https://prompt-manager-eight-phi.vercel.app/
+  * Repositório: https://github.com/Gutobiel/Prompt-manager
+- **Java + Spring Boot**:
+  * Especialização em microsserviços e APIs RESTful seguras, JPA/Hibernate, autenticação JWT e PostgreSQL.
+- **Lógica e Estruturas de Dados em C++**:
+  * Fundamentos de complexidade de algoritmos, ponteiros, memória e estruturas de dados essenciais.
+
+---
+
+## 6. Competências Técnicas Detalhadas
+- **Back-end**: Python (Django, FastAPI), Java (Spring Boot), Node.js, Nest.js, RESTful APIs, Arquitetura MVC, Microsserviços.
+- **Inteligência Artificial & Automação**: LangGraph (orquestração de agentes stateful/cíclicos), LangChain, RAG (Retrieval-Augmented Generation), OpenAI API, Anthropic API, Engenharia de Prompts, Embeddings e Bancos Vetoriais.
+- **Front-end**: JavaScript (ES6+), TypeScript, React, Next.js, Vue.js, HTML5, CSS3, TailwindCSS, Bootstrap, Design Responsivo.
+- **Bancos de Dados**: PostgreSQL, MySQL, SQLite, NoSQL.
+- **DevOps, Ferramentas & Metodologias**: Git, GitHub, Docker, Vercel, Linux, CI/CD, Metodologias Ágeis (Scrum, Kanban), Model Context Protocol (MCP).
+
+---
+
+## 7. Interfaces de Agente & Protocolo MCP
+Augusto Gabriel disponibiliza uma interface MCP pública em seu site:
+- **URL do Servidor MCP**: `https://gutobiel.dev/api/mcp`
+- **Protocolo**: Model Context Protocol (JSON-RPC 2.0 via HTTP POST)
+- **Métodos Suportados**:
+  - `initialize`: Retorna versão e capacidades do servidor.
+  - `tools/list`: Lista as ferramentas disponíveis.
+  - `tools/call`: Executa `get_resume`, `get_projects`, `check_availability` ou `book_intro`.
+- **Canal de contratação direta para agentes**: `POST https://gutobiel.dev/api/hire` (aceita payload JSON com `{ name, contact, brief, budget?, agent? }`).

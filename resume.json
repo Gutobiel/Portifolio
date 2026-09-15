@@ -1,0 +1,109 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Augusto Gabriel Rodrigues dos Santos",
+    "label": "Desenvolvedor Fullstack & Engenheiro de Agentes de IA",
+    "email": "develop.ags@gmail.com",
+    "phone": "+55 61 98569-5745",
+    "url": "https://gutobiel.dev",
+    "summary": "Desenvolvedor Fullstack com foco em aplicações web escaláveis, APIs RESTful e Agentes de IA. Experiência em Python (Django), Java (Spring Boot), JavaScript/TypeScript, LangGraph e LangChain.",
+    "location": {
+      "city": "Brasília",
+      "region": "Distrito Federal",
+      "countryCode": "BR"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "Gutobiel",
+        "url": "https://github.com/Gutobiel"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "gutobiel",
+        "url": "https://www.linkedin.com/in/gutobiel/"
+      },
+      {
+        "network": "Instagram",
+        "username": "Gutobiel.dev",
+        "url": "https://www.instagram.com/Gutobiel.dev"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Qintess (Alocado no DNIT)",
+      "position": "Desenvolvedor Fullstack",
+      "startDate": "2025-08-01",
+      "summary": "Desenvolvimento, manutenção e evolução de aplicações fullstack para sistemas internos do DNIT (Departamento Nacional de Infraestrutura de Transportes).",
+      "highlights": [
+        "Implementação de sistemas e módulos internos com Python / Django e JavaScript.",
+        "Criação de interfaces responsivas com foco em boas práticas de UX/UI e componentização.",
+        "Integração frontend-backend com foco em escalabilidade e estabilidade.",
+        "Auxílio na implementação da IA interna do DNIT para automação de processos."
+      ]
+    },
+    {
+      "name": "Projetos Freelancer",
+      "position": "Desenvolvedor Fullstack",
+      "startDate": "2023-01-01",
+      "summary": "Desenvolvimento de produtos e soluções sob demanda para clientes.",
+      "highlights": [
+        "Marca-AI: Plataforma de gestão e agendamento de quadras esportivas com mapas interativos (Leaflet).",
+        "CondoFLOW: Sistema de gestão condominial para síndicos e moradores.",
+        "Automação de CRMs e bots de atendimento com integração WhatsApp."
+      ]
+    },
+    {
+      "name": "Versátil TI",
+      "position": "Monitor de Linguagem de Programação",
+      "startDate": "2024-02-01",
+      "endDate": "2024-06-30",
+      "summary": "Orientação e apoio a alunos no aprendizado de Python, Java, JavaScript, PHP, SQL, HTML e CSS."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Centro Universitário de Brasília (CEUB)",
+      "area": "Análise e Desenvolvimento de Sistemas",
+      "studyType": "Tecnólogo / Graduação",
+      "startDate": "2022-07-01",
+      "endDate": "2024-12-31",
+      "description": "Projeto final: Semáforos Inteligentes — sistema para melhoria do tráfego urbano utilizando Inteligência Artificial, Big Data e Machine Learning."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Inteligência Artificial & Automação",
+      "level": "Avançado",
+      "keywords": ["LangChain", "LangGraph", "Agentes de IA", "RAG", "OpenAI API", "Engenharia de Prompts"]
+    },
+    {
+      "name": "Back-end",
+      "level": "Avançado",
+      "keywords": ["Python", "Django", "Java", "Spring Boot", "Node.js", "Nest.js", "APIs RESTful", "PostgreSQL", "MySQL", "SQLite"]
+    },
+    {
+      "name": "Front-end",
+      "level": "Avançado",
+      "keywords": ["JavaScript", "TypeScript", "React", "Next.js", "Vue.js", "HTML5", "CSS3"]
+    },
+    {
+      "name": "Ferramentas & DevOps",
+      "level": "Intermediário/Avançado",
+      "keywords": ["Git", "GitHub", "Docker", "Vercel", "Linux", "Figma"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Psiquê - Plataforma com Agentes de IA",
+      "description": "Plataforma com Agentes de IA para psicólogos com RAG (LangGraph + OpenAI API) para análise de consultas, diagnósticos e resumos.",
+      "url": "https://github.com/Gutobiel/Workshop-Arcane-projeto-web-IA"
+    },
+    {
+      "name": "Prompt Manager",
+      "description": "Aplicação web para gerenciar, testar e reutilizar prompts de modelos de IA.",
+      "url": "https://prompt-manager-eight-phi.vercel.app/"
+    }
+  ]
+}

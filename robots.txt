@@ -1,0 +1,41 @@
+# robots.txt para Gutobiel (Augusto Gabriel - Portfolio)
+# Boas-vindas a motores de busca e Agentes de IA
+
+User-agent: *
+Allow: /
+
+# Rastreadores e Agentes de IA autorizados
+User-agent: GPTBot
+Allow: /
+
+# ChatGPT Browse / Web
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Google Gemini / AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Referências para Agentes e LLMs (AEO / Agent-Ready)
+# Informa aos modelos onde obter contexto estruturado
+Sitemap: https://gutobiel.dev/sitemap.xml
+# LLMs context
+# https://llmstxt.org
+# /llms.txt
+# /llms-full.txt
+# /AGENTS.md
+# /api/mcp

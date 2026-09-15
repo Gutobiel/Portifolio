@@ -549,3 +549,36 @@ initReveal();
 initTimeline();
 initParallaxCards();
 loadProjects();
+
+// =============================================
+// WEBMCP (In-Browser Agent Context Surface)
+// =============================================
+function initWebMCP() {
+  if (typeof window === "undefined") return;
+
+  window.modelContext = {
+    protocol: "WebMCP/1.0",
+    developer: "Augusto Gabriel Rodrigues dos Santos (Gutobiel)",
+    role: "Desenvolvedor Fullstack & Engenheiro de Agentes de IA",
+    endpoints: {
+      mcp: "/api/mcp",
+      hire: "/api/hire",
+      llms: "/llms.txt",
+      agents: "/AGENTS.md",
+      resume: "/resume.json"
+    },
+    tools: [
+      { name: "get_resume", description: "Retorna o currículo completo estruturado" },
+      { name: "get_projects", description: "Retorna a lista de projetos e links" },
+      { name: "check_availability", description: "Consulta disponibilidade para contratação" },
+      { name: "book_intro", description: "Envia mensagem de contato/briefing" }
+    ],
+    getResume: async () => {
+      const res = await fetch("/resume.json");
+      return res.json();
+    }
+  };
+
+  console.log("%c[WebMCP] Agent surface initialized for Augusto Gabriel (Gutobiel). Ready for AI agents.", "color: #2563eb; font-weight: bold;");
+}
+initWebMCP();
