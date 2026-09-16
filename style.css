@@ -150,6 +150,44 @@ body {
   color: var(--accent);
 }
 
+/* MCP button beside Contato in Topnav */
+.topnav-links a.nav-btn-mcp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.25rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid rgba(37, 99, 235, 0.28);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 1px 6px rgba(37, 99, 235, 0.12);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.topnav-links a.nav-btn-mcp:hover,
+.topnav-links a.nav-btn-mcp.active {
+  background: var(--accent);
+  color: #ffffff !important;
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .topnav-links a.nav-btn-mcp {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+[data-theme="dark"] .topnav-links a.nav-btn-mcp:hover,
+[data-theme="dark"] .topnav-links a.nav-btn-mcp.active {
+  background: var(--accent);
+  color: #0f172a !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+}
+
 /* Controls (Lang / Theme) */
 .top-controls {
   display: flex;
@@ -1959,3 +1997,129 @@ footer.section {
 .mcp-prompt-btn:hover .mcp-prompt-arrow {
   transform: translateX(3px);
 }
+
+/* =====================
+   CONNECT PAGE (/connect)
+===================== */
+.connect-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 6.8rem 1.5rem 4.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.connect-back {
+  margin-bottom: 2rem;
+}
+
+.connect-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--neu-bg);
+  box-shadow: var(--shadow-out-sm);
+  border: 1px solid var(--accent-border);
+  transition: all 0.22s ease;
+}
+
+.connect-back-btn:hover {
+  color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateX(-3px);
+}
+
+.mcp-agents-card {
+  margin-top: 2rem;
+  background: var(--neu-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-out);
+  padding: 1.6rem;
+  border: 1px solid var(--accent-border);
+}
+
+.mcp-agents-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mcp-agents-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.mcp-agents-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+
+.mcp-code-block {
+  position: relative;
+  background: #0f172a;
+  border-radius: var(--radius-sm);
+  padding: 1.2rem;
+  overflow-x: auto;
+}
+
+[data-theme="light"] .mcp-code-block {
+  background: #1e293b;
+}
+
+.mcp-code-block pre {
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+.mcp-code-block code {
+  font-family: inherit;
+}
+
+.connect-footer {
+  margin-top: auto;
+  padding-top: 3.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.connect-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.connect-footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.84rem;
+  transition: color 0.2s ease;
+}
+
+.connect-footer-links a:hover {
+  color: var(--accent);
+}

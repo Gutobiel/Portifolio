@@ -5,6 +5,7 @@ const robots = fs.readFileSync('robots.txt', 'utf8');
 const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 const indexHtml = fs.readFileSync('index.html', 'utf8');
 const analyticsHtml = fs.readFileSync('analytics.html', 'utf8');
+const connectHtml = fs.readFileSync('connect.html', 'utf8');
 
 const sitemapUrls = sitemap
   .match(/<loc>(.*?)<\/loc>/g)
@@ -32,6 +33,16 @@ const pages = [
     content: extractTextFromHtml(indexHtml),
     jsonLd: extractJsonLd(indexHtml),
     ogTags: { 'og:title': extractTitle(indexHtml), 'og:description': extractDescription(indexHtml) }
+  },
+  {
+    url: 'https://gutobiel.vercel.app/connect',
+    pathname: '/connect',
+    html: connectHtml,
+    title: extractTitle(connectHtml),
+    description: extractDescription(connectHtml),
+    content: extractTextFromHtml(connectHtml),
+    jsonLd: extractJsonLd(connectHtml),
+    ogTags: { 'og:title': extractTitle(connectHtml), 'og:description': extractDescription(connectHtml) }
   },
   {
     url: 'https://gutobiel.vercel.app/analytics',

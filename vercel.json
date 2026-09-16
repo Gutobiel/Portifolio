@@ -1,11 +1,9 @@
 {
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/connect", "destination": "/connect.html" },
     { "source": "/analytics", "destination": "/analytics.html" },
     { "source": "/api/mcp/analytics", "destination": "/api/analytics" },
     { "source": "/api/mcp/analitycs", "destination": "/api/analytics" }
-  ],
-  "redirects": [
-    { "source": "/connect", "destination": "/#mcp", "permanent": false }
   ]
 }
