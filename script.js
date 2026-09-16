@@ -3,7 +3,7 @@
 // =============================================
 const dict = {
   pt: {
-    nav_exp: "Experiencia", nav_proj: "Projetos", nav_tech: "Tecnologias", nav_contact: "Contato",
+    nav_exp: "Experiencia", nav_proj: "Projetos", nav_tech: "Tecnologias", nav_mcp: "MCP", nav_contact: "Contato",
     hero_desc: "Sou desenvolvedor full-stack com foco em aplicacoes web escalaveis, atuando tanto no front-end quanto no back-end. Trabalho com APIs RESTful, automacao de processos, bots de atendimento e integracoes com servicos externos, incluindo fluxos de vendas e atendimento via WhatsApp. Atualmente estudo e desenvolvo Agentes de IA.",
     hero_status: "Disponivel para projetos &middot; Contratações",
     carreira: "Carreira", exp_title: "Experiencia profissional",
@@ -23,12 +23,14 @@ const dict = {
     rep_kicker: "Repositorios", rep_title: "Projetos que representam meu estilo", rep_btn: "Ver todos os repositorios no GitHub &rarr;",
     curso_kicker: "Certificados & Cursos", curso_title: "Evolucao continua",
     tech_kicker: "Tecnologias", tech_title: "Stack principal", tech_f: "Frontend", tech_b: "Backend", tech_i: "IA & Automacao", tech_t: "Ferramentas",
+    mcp_kicker: "08 / Agent-ready &middot; MCP", mcp_title: "This site speaks MCP.",
+    mcp_desc: "Agent-ready, humans welcome. Adicione este portfólio como conector e seu agente poderá avaliar meu trabalho, checar disponibilidade e agendar uma introdução de projeto. Sem conta, autenticação ou cadastro.",
     cont_kicker: "Contato", cont_title: "Vamos conversar?",
     wpp: "Vamos marcar um meet?",
     dev_title: "Desenvolvedor Fullstack"
   },
   en: {
-    nav_exp: "Experience", nav_proj: "Projects", nav_tech: "Technologies", nav_contact: "Contact",
+    nav_exp: "Experience", nav_proj: "Projects", nav_tech: "Technologies", nav_mcp: "MCP", nav_contact: "Contact",
     hero_desc: "I am a full-stack developer focusing on scalable web applications, working on both front-end and back-end. Experience with RESTful APIs, process automation, customer service bots, and external service integrations, including sales flows via WhatsApp. Currently studying and developing AI Agents.",
     hero_status: "Available for projects &middot; Hiring",
     carreira: "Career", exp_title: "Professional Experience",
@@ -48,12 +50,14 @@ const dict = {
     rep_kicker: "Repositories", rep_title: "Projects representing my style", rep_btn: "View all repositories on GitHub &rarr;",
     curso_kicker: "Certificates & Courses", curso_title: "Continuous evolution",
     tech_kicker: "Technologies", tech_title: "Main Stack", tech_f: "Frontend", tech_b: "Backend", tech_i: "AI & Automation", tech_t: "Tools",
+    mcp_kicker: "08 / Agent-ready &middot; MCP", mcp_title: "This site speaks MCP.",
+    mcp_desc: "Agent-ready, humans welcome. Add this portfolio as a connector and your agent can evaluate my work, check availability, and book a project intro. No account, auth, or signup.",
     cont_kicker: "Contact", cont_title: "Let's talk?",
     wpp: "Shall we schedule a meet?",
     dev_title: "Fullstack Developer"
   },
   es: {
-    nav_exp: "Experiencia", nav_proj: "Proyectos", nav_tech: "Tecnologías", nav_contact: "Contacto",
+    nav_exp: "Experiencia", nav_proj: "Proyectos", nav_tech: "Tecnologías", nav_mcp: "MCP", nav_contact: "Contacto",
     hero_desc: "Soy desarrollador full-stack con enfoque en aplicaciones web escalables, actuando tanto en el front-end como en el back-end. Trabajo con APIs RESTful, automatización de procesos, bots de atención e integraciones con servicios externos (ventas por WhatsApp). Actualmente estudio y desarrollo Agentes de IA.",
     hero_status: "Disponible para proyectos &middot; Contrataciones",
     carreira: "Carrera", exp_title: "Experiencia profesional",
@@ -73,6 +77,8 @@ const dict = {
     rep_kicker: "Repositorios", rep_title: "Proyectos que representan mi estilo", rep_btn: "Ver todos los repositorios en GitHub &rarr;",
     curso_kicker: "Certificados y Cursos", curso_title: "Evolución continua",
     tech_kicker: "Tecnologías", tech_title: "Stack principal", tech_f: "Frontend", tech_b: "Backend", tech_i: "IA y Automatización", tech_t: "Herramientas",
+    mcp_kicker: "08 / Agent-ready &middot; MCP", mcp_title: "Este sitio habla MCP.",
+    mcp_desc: "Agent-ready, humans welcome. Agregue este portafolio como conector y su agente podrá evaluar mi trabajo, consultar disponibilidad y agendar una introducción de proyecto. Sin cuenta, autenticación ni registro.",
     cont_kicker: "Contacto", cont_title: "¿Hablamos?",
     wpp: "¿Agendamos una reunión?",
     dev_title: "Desarrollador Fullstack"
@@ -541,6 +547,41 @@ function initParallaxCards() {
 }
 
 // =============================================
+// COPY BUTTONS (MCP Endpoints & Prompts)
+// =============================================
+function initCopyButtons() {
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const text = btn.getAttribute("data-copy") || "";
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      const isPrompt = btn.classList.contains("mcp-prompt-btn");
+      const isMini = btn.classList.contains("mcp-mini-copy");
+      const origHtml = btn.innerHTML;
+      if (isPrompt) {
+        btn.innerHTML = '<span class="mcp-prompt-arrow" style="color:#10b981;">✓</span> Copied prompt to clipboard!';
+      } else if (isMini) {
+        btn.textContent = "copied ✓";
+      } else {
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>copied ✓</span>';
+      }
+      setTimeout(() => {
+        btn.innerHTML = origHtml;
+      }, 2000);
+    });
+  });
+}
+
+// =============================================
 // BOOT
 // =============================================
 injectCardStyles();
@@ -548,6 +589,7 @@ initParticles();
 initReveal();
 initTimeline();
 initParallaxCards();
+initCopyButtons();
 loadProjects();
 
 // =============================================
