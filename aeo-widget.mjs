@@ -1070,6 +1070,9 @@ var AeoWidget = class {
   }
   async showOverlay() {
     var _a;
+    if (this.overlayElement) {
+      this.closeOverlay();
+    }
     const icons = getIcons();
     const mdPath = this.getMarkdownPath();
     this.overlayElement = document.createElement("div");
@@ -1108,7 +1111,8 @@ var AeoWidget = class {
         </div>
       </div>
     `;
-    this.container.appendChild(this.overlayElement);
+    document.body.appendChild(this.overlayElement);
+    document.body.style.overflow = "hidden";
     const closeBtn = this.overlayElement.querySelector(".aeo-close-btn");
     closeBtn == null ? void 0 : closeBtn.addEventListener("click", () => this.closeOverlay());
     const viewTabs = this.overlayElement.querySelectorAll(".aeo-view-tab");
@@ -1362,6 +1366,7 @@ var AeoWidget = class {
       this.overlayElement.remove();
       this.overlayElement = void 0;
     }
+    document.body.style.overflow = "";
     this.isAIMode = false;
     this.isLoading = false;
     this.updateToggleState();

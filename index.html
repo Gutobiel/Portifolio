@@ -562,7 +562,7 @@
       try {
         let AeoWidgetClass;
         try {
-          const mod = await import('./aeo-widget.mjs');
+          const mod = await import('./aeo-widget.mjs?v=2');
           AeoWidgetClass = mod.AeoWidget;
         } catch (e) {
           const mod = await import('https://esm.sh/aeo.js/widget');
