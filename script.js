@@ -604,7 +604,7 @@ loadProjects();
 function initWebMCP() {
   if (typeof window === "undefined") return;
 
-  window.modelContext = {
+  const ctxObj = {
     protocol: "WebMCP/1.0",
     developer: "Augusto Gabriel Rodrigues dos Santos (Gutobiel)",
     role: "Desenvolvedor Fullstack & Engenheiro de Agentes de IA",
@@ -626,6 +626,11 @@ function initWebMCP() {
       return res.json();
     }
   };
+
+  window.modelContext = ctxObj;
+  if (typeof document !== "undefined") {
+    document.modelContext = ctxObj;
+  }
 
   console.log("%c[WebMCP] Agent surface initialized for Augusto Gabriel (Gutobiel). Ready for AI agents.", "color: #2563eb; font-weight: bold;");
 }
