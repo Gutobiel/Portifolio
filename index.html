@@ -225,6 +225,7 @@
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </button>
+      <div id="aeo-widget-container" class="aeo-nav-widget" title="Alternar visão Humano / IA"></div>
     </div>
   </nav>
 
@@ -554,6 +555,46 @@
   </a>
 
   <script src="./script.js"></script>
+  <script type="module">
+    async function initAeoWidget() {
+      const container = document.getElementById('aeo-widget-container');
+      if (!container) return;
+      try {
+        let AeoWidgetClass;
+        try {
+          const mod = await import('./aeo-widget.mjs');
+          AeoWidgetClass = mod.AeoWidget;
+        } catch (e) {
+          const mod = await import('https://esm.sh/aeo.js/widget');
+          AeoWidgetClass = mod.AeoWidget;
+        }
+        if (AeoWidgetClass) {
+          new AeoWidgetClass({
+            container,
+            config: {
+              title: 'Augusto Gabriel | Fullstack & Engenheiro de IA',
+              url: 'https://gutobiel.vercel.app',
+              widget: {
+                enabled: true,
+                size: 'small',
+                humanLabel: 'Humano',
+                aiLabel: 'IA',
+                showBadge: true
+              }
+            }
+          });
+        }
+      } catch (err) {
+        console.warn('AEO Widget init:', err);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAeoWidget);
+    } else {
+      initAeoWidget();
+    }
+  </script>
 </body>
 
 </html>
