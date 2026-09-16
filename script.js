@@ -23,8 +23,8 @@ const dict = {
     rep_kicker: "Repositorios", rep_title: "Projetos que representam meu estilo", rep_btn: "Ver todos os repositorios no GitHub &rarr;",
     curso_kicker: "Certificados & Cursos", curso_title: "Evolucao continua",
     tech_kicker: "Tecnologias", tech_title: "Stack principal", tech_f: "Frontend", tech_b: "Backend", tech_i: "IA & Automacao", tech_t: "Ferramentas",
-    mcp_kicker: "08 / Agent-ready &middot; MCP", mcp_title: "This site speaks MCP.",
-    mcp_desc: "Agent-ready, humans welcome. Adicione este portfólio como conector e seu agente poderá avaliar meu trabalho, checar disponibilidade e agendar uma introdução de projeto. Sem conta, autenticação ou cadastro.",
+    mcp_kicker: "08 / Pronto para Agentes &middot; MCP", mcp_title: "Este site fala MCP.",
+    mcp_desc: "Pronto para agentes, bem-vindo a humanos. Adicione este portfólio como conector e seu agente poderá avaliar meu trabalho, checar disponibilidade e agendar uma introdução de projeto. Sem conta, autenticação ou cadastro.",
     cont_kicker: "Contato", cont_title: "Vamos conversar?",
     wpp: "Vamos marcar um meet?",
     dev_title: "Desenvolvedor Fullstack"
@@ -567,12 +567,18 @@ function initCopyButtons() {
       const isPrompt = btn.classList.contains("mcp-prompt-btn");
       const isMini = btn.classList.contains("mcp-mini-copy");
       const origHtml = btn.innerHTML;
+      const isPt = currentLang === "pt";
+      const isEs = currentLang === "es";
+
+      const copiedText = isPt ? "copiado ✓" : (isEs ? "copiado ✓" : "copied ✓");
+      const promptCopiedText = isPt ? "Prompt copiado para a área de transferência!" : (isEs ? "¡Prompt copiado al portapapeles!" : "Copied prompt to clipboard!");
+
       if (isPrompt) {
-        btn.innerHTML = '<span class="mcp-prompt-arrow" style="color:#10b981;">✓</span> Copied prompt to clipboard!';
+        btn.innerHTML = `<span class="mcp-prompt-arrow" style="color:#10b981;">✓</span> ${promptCopiedText}`;
       } else if (isMini) {
-        btn.textContent = "copied ✓";
+        btn.textContent = copiedText;
       } else {
-        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>copied ✓</span>';
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>${copiedText}</span>`;
       }
       setTimeout(() => {
         btn.innerHTML = origHtml;
